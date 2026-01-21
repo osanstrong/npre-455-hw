@@ -1,0 +1,8 @@
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*:mshield
+*:Zone.Identifier
+*.pdf

@@ -1,0 +1,181 @@
+\documentclass[11pt]{article}
+\usepackage[hidelinks]{hyperref}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage[acronym,nomain,nonumberlist,nogroupskip,nopostdot]{glossaries} % for glossary of acronyms
+\usepackage{siunitx}
+\usepackage{verbatim}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{threeparttable}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{cancel}
+\usepackage{mathrsfs}
+\usepackage{mhchem}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+\usepackage{xcolor}
+\usepackage{amsmath,mathtools}
+
+% \setacronymstyle{long-short}
+% \loadglsentries{/Users/anovak/projects/tex_inputs/glossary}
+
+\newcommand{\mdash}{\discretionary{}{}{\kern 0.1em}---\discretionary{}{}{\kern 0.1em}}
+\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % = `top' strut
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
+\newcommand{\beq}{\begin{equation}\begin{aligned}}
+\newcommand{\eeq}{\end{aligned}\end{equation}}
+\newcommand{\beqs}{\begin{equation*}\begin{aligned}}
+\newcommand{\eeqs}{\end{aligned}\end{equation*}}
+
+\usepackage{color} % \textcolor
+\usepackage{soul} % \hl
+\newcommand{\unfinished}[1][UNFINISHED]{\textcolor{red}{\textbf{\hl{#1}}}}
+
+\usepackage{tcolorbox}
+
+\setlength{\parskip}{5pt}
+
+\begin{document}
+\noindent {\bf \Large NPRE 455: Homework 1}\\
+
+%\todo{add python refresher}
+%\todo{add sympy root finding}
+
+\begin{tcolorbox}
+This homework will freshen up your math skills by asking you to solve several differential equations we will frequently encounter in this class. It is {\it crucial} that you do well on this assignment in order to prepare you for this course. On Canvas, please see the ``Differential Equations Review'' file in the ``Handouts'' folder if you need a refresher on differential equations.\\
+
+For each problem, the high-level learning goal is indicated in bold font preceding the problem statement.
+\end{tcolorbox}
+
+\vspace{2cm} 
+
+\noindent 1. ({\bf factual concept recall}) Provide a {\it short} (1-2 sentences) answer to each of the following questions.
+
+\begin{enumerate}
+\item[(a)] ({\bf 1 point}) Define ``binding energy.''
+\begin{enumerate}
+    \item Binding energy can be thought of as the energy it would take to separate a nucleus into every individual nucleon.
+\end{enumerate}
+\item[(b)] ({\bf 2 points}) Define a decay constant, $\lambda$. What are its units?
+\begin{enumerate}
+    \item A decay constant $\lambda$ (typical units $\frac{1}{s}$) \unfinished
+\end{enumerate}
+\item[(c)] ({\bf 2 points}) Define a microscopic cross section, $\sigma_i$. What are its units?
+\item[(d)] ({\bf 1 point}) Define a macroscopic cross section, $\Sigma_i$. What are its units?
+\item[(e)] ({\bf 1 point}) The total cross section, $\sigma_t$, can always be written as the sum of two other cross sections. Fill in the blanks for ? and ??.
+
+\beq
+\sigma_t\equiv \sigma_?+\sigma_{??}
+\eeq
+
+\item[(f)] ({\bf 1 point}) What is a ``resonance'' in plots of $\sigma$? 
+\item[(g)] ({\bf 1 point}) Below what energy do neutrons typically start interacting with entire molecules, clumps of atoms, and material lattice structures?
+\item[(h)] ({\bf 1 point}) What does the symbol $\nu$ represent? What is a typical value?
+\item[(i)] ({\bf 1 point}) Why do resonances seem to suddenly ``stop'' on plots of $\sigma$?
+\item[(j)] ({\bf 1 point}) What is the difference between fissile and fissionable nuclides? Give examples of each.
+\item[(k)] ({\bf 1 point}) What does the symbol $\beta$ represent? What is a typical value?
+\item[(l)] ({\bf 1 point}) What does the symbol $\chi_p$ represent? 
+\item[(m)] ({\bf 1 point}) How much energy is released in a typical fission reaction?
+\end{enumerate}
+
+\clearpage
+\noindent 2. ({\bf how to simplify and solve spherical Helmholtz equations}) $\phi(r)$ is governed by the following differential equation,
+
+\beq
+\label{eq:one}
+\frac{1}{r^2}\left\lbrack \frac{d}{dr}\left(r^2\frac{d\phi(r)}{dr}\right)\right\rbrack \pm\gamma^2\phi(r)=0
+\eeq
+
+\noindent This type of equation, of the form $\nabla^2\phi\pm\gamma^2\phi=0$, is also called a ``Helmholtz equation'' because it appears so often in engineering -- Eq. \eqref{eq:one} is identical to the neutron diffusion equation in spherical coordinate systems (under certain circumstances). 
+
+\begin{enumerate}
+\item[(a)] ({\bf 5 points}) By letting $\phi(r)\equiv\mu(r)/r$, derive the differential equation for $\mu(r)$. Leave the $\pm$ in your answer.
+\item[(b)] ({\bf 10 points}) Using the solutions for $\mu(r)$, write down the general solutions for $\phi(r)$ assuming the $+$ sign.
+\item[(c)] ({\bf 10 points}) Using the solutions for $\mu(r)$, write down the general solutions for $\phi(r)$ assuming the $-$ sign.
+\end{enumerate}
+
+\clearpage
+\noindent 3. ({\bf how to solve first-order ODEs}) Radioactive decay, for a nuclide species $N(t)$ [atoms/m$^3$] and decay constant $\lambda$ [1/s] is governed by the following differential equation,
+
+\beq
+\label{eq:one1}
+\frac{dN(t)}{dt}+\lambda N(t)=f(t)
+\eeq
+
+\noindent where $f(t)$ is a function [atoms/m$^3$/s] which includes any additional rates of production and removal of the nuclide species $N$ (e.g., production as a fission product, loss from neutron capture, ...).
+
+\begin{enumerate}
+\item[(a)] ({\bf 10 points}) Solve Eq. \eqref{eq:one1} subject to the boundary condition $N(0)=N_0$.
+\end{enumerate}
+
+
+\clearpage
+\noindent 4. ({\bf solving Cartesian Helmholtz equations}) Consider the following differential equation -- under certain circumstances, this equation is identical to the neutron diffusion equation in Cartesian geometries.
+
+\beq
+\label{eq:one2}
+\frac{d^2\phi(x)}{dx^2}+a^2\phi(x)=0
+\eeq
+
+\begin{enumerate}
+\item[(a)] ({\bf 10 points}) Solve Eq. \eqref{eq:one2} subject to the boundary conditions $\phi(0)=A$ and $\phi(L)=B$.
+\end{enumerate}
+
+\clearpage
+\noindent 5. ({\bf how to solve inhomogeneous ODEs}) Consider the following differential equation -- under certain circumstances, this equation is identical to the neutron diffusion equation in Cartesian geometries.
+
+\beq
+\label{eq:one3}
+\frac{d^2\phi(x)}{dx^2}-a^2\phi(x)=2x^3
+\eeq
+
+\noindent This equation is called ``inhomogeneous'' because not every term in the differential equation contains $\phi$, our unknown.
+
+\begin{enumerate}
+\item[(a)] ({\bf 10 points}) Solve Eq. \eqref{eq:one3} subject to the boundary conditions $\phi(0)=A$ and $\phi(L)=B$.
+\end{enumerate}
+
+\clearpage
+\noindent 6. ({\bf deep concept understanding}) For each of the following statements, indicate whether the statement is true/false or yes/no. Provide an explanation.
+
+\begin{enumerate}
+\item [(a)] ({\bf 5 points}) (True/False) Kinetic energy is always conserved before and after a reaction. 
+\item [(b)] ({\bf 5 points}) (Yes/No) Very slow neutrons are traveling through water and yttrium hydride; in order to study this process, you first need to compute the macroscopic cross sections for these two materials. You look up the cross sections for the individual atoms and then combine them as follows.
+
+\beq
+\Sigma_t [H_2O]=\sigma_{H,t}N_H+\sigma_{O,t}N_O
+\eeq
+
+\beq
+\Sigma_t [YH_2]=\sigma_{H,t}N_H+\sigma_{Y,t}N_Y
+\eeq
+
+Is this approach correct?
+\end{enumerate}
+
+\clearpage
+\noindent 7. ({\bf $\Sigma$ for mixtures, terminology definitions}) One way that tritium is produced in a nuclear reactor is from an $(n,\gamma)$ reaction on deuterium,
+
+\beq
+\ce{^2_1 H} +n\rightarrow\ce{^3_1 H}+\gamma
+\eeq
+
+\begin{enumerate}
+\item[(a)] ({\bf 20 points}) Predict the tritium production rate, in units of mg/year, from the above reaction in a light water reactor. Assume that macroscopic cross sections are not a function of time. Parameters describing the reactor are provided below. Report your answer to THREE places after the decimal point.
+
+\begin{itemize}
+\item Average thermal neutron flux: $\phi=10^{13}$ 1/cm$^2$/s
+\item Average water density: 750 kg/m$^3$
+\item Volume occupied by water: 9.54 \si{\cubic\meter}
+\item $\ce{^2_1 H}$ atomic concentration in elemental (natural) hydrogen: 0.015\%
+\item Thermal neutron capture cross section for $\ce{^2_1 H}$: 506 $\mu$b
+\end{itemize}
+\end{enumerate}
+
+({\it Hint: Be very careful with units. The correct answer is within the range 0.03--0.06 mg/year.}).
+
+\end{document}
+
