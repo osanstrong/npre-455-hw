@@ -165,6 +165,34 @@ For each problem, the high-level learning goal is indicated in bold font precedi
 
 \begin{enumerate}
 \item[(a)] ({\bf 10 points}) Solve Eq. \eqref{eq:one1} subject to the boundary condition $N(0)=N_0$.
+    Let
+    \begin{equation}
+    p(t) = exp(\int_{0}^{t}\lambda du) = e^{\lambda t}
+    \end{equation}
+    then
+    \begin{equation}
+    \frac{dp(t)}{dt} = \lambda e^{\lambda t}
+    \end{equation}
+    Multiplying by $p(x)$,
+    \begin{align*}
+        \frac{dN(t)}{dt}e^{\lambda t}+\lambda N(t)e^{\lambda t}=f(t)e^{\lambda t} \\
+        \frac{d}{dt}\left[N(t)e^{\lambda t}\right]=f(t)e^{\lambda t} \\   
+        N(t)e^{\lambda t} = \int f(t)e^{\lambda t}dt + C \\
+        N(t) = e^{-\lambda t} \left(\int f(t)e^{\lambda t}dt + C \right)\\
+        % N(t)e^{\lambda t} = \int_{0}^{t} f(u)e^{\lambda u}du \\
+        % N(t) = e^{-\lambda t} \int_{0}^{t} f(u)e^{\lambda u}du\\
+    \end{align*}
+    Applying the boundary condition $N(0) = N_0$,
+    % \begin{align*}
+    %     N(t) = e^{-\lambda t} \int_{0}^{t} f(u)e^{\lambda u}du\\
+    % \end{align*}
+    \begin{align*}
+        N(0) &= e^{-\lambda 0} \left(\left[\int f(t)e^{\lambda t}dt\right]_0 + C \right) = N_0 \\
+        N_0 &= \left[\int f(t)e^{\lambda t}dt\right]_0 + C \\
+        C &= N_0 - \left[\int f(t)e^{\lambda t}dt\right]_0\\
+        N(t) &= e^{-\lambda t} \left(\int f(t)e^{\lambda t}dt + N_0 - \left[\int f(t)e^{\lambda t}dt\right]_0 \right)\\
+        N(t) &= e^{-\lambda t} \left(\int_{0}^{t} f(u)e^{\lambda u}du + N_0 \right)\\
+    \end{align*}
 \end{enumerate}
 
 
