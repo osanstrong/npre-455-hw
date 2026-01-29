@@ -205,7 +205,33 @@ For each problem, the high-level learning goal is indicated in bold font precedi
 \eeq
 
 \begin{enumerate}
-\item[(a)] ({\bf 10 points}) Solve Eq. \eqref{eq:one2} subject to the boundary conditions $\phi(0)=A$ and $\phi(L)=B$.
+\item[(a)] ({\bf 10 points}) Solve Eq. \eqref{eq:one2} subject to the boundary conditions $\phi(0)=A$ and $\phi(L)=B$.\\
+\begin{itemize}
+    \item As a predicted general solution to Helmholtz equations, let $\phi(x)=C_1cos(ax) + C_2sin(ax)$
+    \begin{align*}
+        \frac{d^2\phi(x)}{dx^2}+a^2\phi(x)&=0\\
+        -\left(a^2C_1cos(ax) + a^2C_2sin(ax)\right) + a^2 (C_1cos(ax) + C_2sin(ax)) &= 0\\
+        0 &= 0\\
+    \end{align*}
+    Then,
+    \begin{align*}
+        \phi(x)&=C_1cos(ax) + C_2sin(ax) \\
+        \phi(0)&=A \\
+        A &=C_1cos(0) + C_2sin(0) \\
+        C_1 &= A \\
+    \end{align*}
+    \begin{align*}
+        \phi(L)&=B \\
+        B &= Acos(aL) + C_2sin(aL) \\
+        B - Acos(aL) &= C_2sin(aL) \\
+        C_2 &= \frac{B-Acos(aL)}{sin(aL)} \\
+    \end{align*}
+    \begin{equation}
+        \phi(x) = Acos(ax) + \frac{B-Acos(aL)}{sin(aL)}sin(ax)
+    \end{equation}
+
+\end{itemize}
+
 \end{enumerate}
 
 \clearpage
