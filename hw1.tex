@@ -61,24 +61,58 @@ For each problem, the high-level learning goal is indicated in bold font precedi
 \end{enumerate}
 \item[(b)] ({\bf 2 points}) Define a decay constant, $\lambda$. What are its units?
 \begin{enumerate}
-    \item A decay constant $\lambda$ (typical units $\frac{1}{s}$) \unfinished
+    \item A decay constant $\lambda$ (typical units $\frac{1}{s}$) describes how quickly a kind of atom decays, such that after time $t$, $exp(t/\lambda)$ is the likelihood of a given atom, or the fraction of a given macroscopic quantity, remaining.
 \end{enumerate}
 \item[(c)] ({\bf 2 points}) Define a microscopic cross section, $\sigma_i$. What are its units?
+\begin{enumerate}
+    \item A microscopic cross section $\sigma_i$  (units $b$, $10^{-28}m^2$), describes the feasibility of a particle (here, a neutron) colliding with a target (nucleus) to trigger the phenomenon $i$.
+    Dimensionally, it is an area facing the oncoming particle, but it is not literally the cross sectional area of the target.
+\end{enumerate}
 \item[(d)] ({\bf 1 point}) Define a macroscopic cross section, $\Sigma_i$. What are its units?
-\item[(e)] ({\bf 1 point}) The total cross section, $\sigma_t$, can always be written as the sum of two other cross sections. Fill in the blanks for ? and ??.
+\begin{enumerate}
+    \item The macroscopic cross section $\Sigma_i$ (units $\frac{1}{m}$) of a material describes how quickly (over distance, not time) a particle will interact with the material in fashion $i$, on average.
+    Its inverse, the mean free path, is the average distance the particle would travel before interacting.
+\end{enumerate}
+\item[(e)] ({\bf 1 point}) The total cross section, $\sigma_t$, can always be written as the sum of two other cross sections, scattering ($\sigma_s$) and absorption ($\sigma_a$).
 
 \beq
-\sigma_t\equiv \sigma_?+\sigma_{??}
+\sigma_t\equiv \sigma_s+\sigma_a
 \eeq
 
 \item[(f)] ({\bf 1 point}) What is a ``resonance'' in plots of $\sigma$? 
+\begin{itemize}
+    \item A ``resonance'' is a peak in such a plot at a specific energy, for which $\sigma$ is drastically higher than other nearby energies.
+    \item This might be, for example, a low energy such that the corresponding wavelength lines up with the length of a crystal lattice bond.
+\end{itemize}
 \item[(g)] ({\bf 1 point}) Below what energy do neutrons typically start interacting with entire molecules, clumps of atoms, and material lattice structures?
+\begin{itemize}
+    \item Below around 1eV, when the corresponding wavelength grows to the scale of the distance between atoms (or a specific ``Bragg Cutoff'' energy associated with the spacings of a lattice), the neutron may interact with entire molecules or crystals.
+\end{itemize}
 \item[(h)] ({\bf 1 point}) What does the symbol $\nu$ represent? What is a typical value?
+\begin{itemize}
+    % \item The speed of a neutron, $\nu$, varies wildly but might be millions of miles per hour, or at the low end (0.01eV), still 980 miles per hour, faster than a 747.
+    \item $\nu$, the number of neutrons released in a fission event (either promptly or with delay), and an average value $\bar{\nu}$ might be around 2.4 for plutonium.
+\end{itemize}
 \item[(i)] ({\bf 1 point}) Why do resonances seem to suddenly ``stop'' on plots of $\sigma$?
+\begin{itemize}
+    \item Beyond a certain point, resonances are so closely packed that it becomes unfeasible to manually tell, and instead a probability table is used of the likelihood of it resonating. At even higher energy, the tables are no longer needed as the resonances fully overlap.
+\end{itemize}
 \item[(j)] ({\bf 1 point}) What is the difference between fissile and fissionable nuclides? Give examples of each.
+\begin{itemize}
+    \item Fissile nuclei, like $\mathrm{^{235}U}$, readily undergo fission when struck by a thermal neutron. Fissionable nuclides, like $\mathrm{^{238}U}$, are more loosely defined but are more known for fission triggered by high energy neutrons.
+\end{itemize}
 \item[(k)] ({\bf 1 point}) What does the symbol $\beta$ represent? What is a typical value?
+\begin{itemize}
+    \item $\beta$ represents the fraction of fission neutrons which are delayed, $\bar{\nu}_d/\bar{\nu}$, and is typically very small, 0.0065 for $\mathrm{^{235}U}$ in thermal fission.
+\end{itemize}
 \item[(l)] ({\bf 1 point}) What does the symbol $\chi_p$ represent? 
+\begin{itemize}
+    \item $\chi$ is a probability density function describing the energies a neutron will be born at; $\chi_p$ represents this distribution for prompt neutrons.
+\end{itemize}
 \item[(m)] ({\bf 1 point}) How much energy is released in a typical fission reaction?
+\begin{itemize}
+    \item A typical fission reaction will release around 193MeV of energy. (Discounting neutrinos, since those are essentially unrecoverable)
+\end{itemize}
 \end{enumerate}
 
 \clearpage
@@ -92,9 +126,31 @@ For each problem, the high-level learning goal is indicated in bold font precedi
 \noindent This type of equation, of the form $\nabla^2\phi\pm\gamma^2\phi=0$, is also called a ``Helmholtz equation'' because it appears so often in engineering -- Eq. \eqref{eq:one} is identical to the neutron diffusion equation in spherical coordinate systems (under certain circumstances). 
 
 \begin{enumerate}
-\item[(a)] ({\bf 5 points}) By letting $\phi(r)\equiv\mu(r)/r$, derive the differential equation for $\mu(r)$. Leave the $\pm$ in your answer.
+\item[(a)] ({\bf 5 points}) By letting $\phi(r)\equiv\mu(r)/r$, derive the differential equation for $\mu(r)$. Leave the $\pm$ in your answer.\\
+    \begin{align*}
+    \frac{1}{r^2}\left\lbrack \frac{d}{dr}\left(r^2\frac{d\phi(r)}{dr}\right) \right\rbrack &\pm\gamma^2\phi(r)=0 \\  
+    \frac{1}{r^2}\left\lbrack \frac{d}{dr}\left(r^2\frac{d}{dr}\left[\frac{\mu(r)}{r}\right]\right) \right\rbrack &\pm\gamma^2\left(\frac{\mu(r)}{r}\right)=0 \\
+    \frac{1}{r^2}\left\lbrack \frac{d}{dr}\left(r^2\left[\frac{\mu'(r)r - \mu(r)}{r^2}\right]\right) \right\rbrack &\pm\gamma^2\left(\frac{\mu(r)}{r}\right)=0 \\
+    \frac{1}{r^2}\left\lbrack \frac{d}{dr}\left(\mu'(r)r - \mu(r)\right) \right\rbrack &\pm\gamma^2\left(\frac{\mu(r)}{r}\right)=0 \\
+    \frac{1}{r^2}\left\lbrack \mu''(r)r + \mu'(r) - \mu'(r) \right\rbrack &\pm\gamma^2\left(\frac{\mu(r)}{r}\right)=0 \\
+    \frac{\mu''(r)}{r} &\pm\gamma^2\left(\frac{\mu(r)}{r}\right)=0 \\
+    \mu''(r) &\pm\gamma^2\mu(r) = 0
+    \end{align*}
+    % \begin{align*}
+    %     \frac{1}{r^2}\left\lbrack \frac{d}{dr}\left(r^2\frac{d\phi(r)}{dr}\right) \right\rbrack& \pm\gamma^2\phi(r)=0
+    % \end{align*}
 \item[(b)] ({\bf 10 points}) Using the solutions for $\mu(r)$, write down the general solutions for $\phi(r)$ assuming the $+$ sign.
+    \begin{align*}
+        \mu''(r) + \gamma^2\mu(r) &= 0 \\ 
+        \rightarrow\mu(r) &= C_1cos(\gamma r) + C_2sin(\gamma r)\\
+        \phi(r) &= rC_1cos(\gamma r) + rC_2sin(\gamma r)\\
+    \end{align*}
 \item[(c)] ({\bf 10 points}) Using the solutions for $\mu(r)$, write down the general solutions for $\phi(r)$ assuming the $-$ sign.
+    \begin{align*}
+        \mu''(r) - \gamma^2\mu(r) &= 0 \\ 
+        \rightarrow\mu(r) &= C_1cosh(\gamma r) + C_2sinh(\gamma r)\\
+        \phi(r) &= rC_1cosh(\gamma r) + rC_2sinh(\gamma r)\\
+    \end{align*}
 \end{enumerate}
 
 \clearpage
