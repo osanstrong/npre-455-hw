@@ -325,15 +325,38 @@ Is this approach correct?
 \eeq
 
 \begin{enumerate}
-\item[(a)] ({\bf 20 points}) Predict the tritium production rate, in units of mg/year, from the above reaction in a light water reactor. Assume that macroscopic cross sections are not a function of time. Parameters describing the reactor are provided below. Report your answer to THREE places after the decimal point.
+\item[(a)] ({\bf 20 points}) Predict the tritium production rate $\dot{T}$, in units of mg/year, from the above reaction in a light water reactor. Assume that macroscopic cross sections are not a function of time. Parameters describing the reactor are provided below. Report your answer to THREE places after the decimal point.
 
 \begin{itemize}
 \item Average thermal neutron flux: $\phi=10^{13}$ 1/cm$^2$/s
-\item Average water density: 750 kg/m$^3$
-\item Volume occupied by water: 9.54 \si{\cubic\meter}
+\item Average water density: 750 kg/m$^3$ ($\rho$)
+\item Volume occupied by water: 9.54 \si{\cubic\meter} ($V$)
 \item $\ce{^2_1 H}$ atomic concentration in elemental (natural) hydrogen: 0.015\%
-\item Thermal neutron capture cross section for $\ce{^2_1 H}$: 506 $\mu$b
+\item Thermal neutron capture cross section for $\ce{^2_1 H}$: 506 $\mu$
 \end{itemize}
+Additionally, assume
+\begin{itemize}
+\item Molecular mass of water: 18.015 g/mol ($M_w$)
+\item Atomic mass of tritium: 3.016 g/mol ($M_t$)
+\end{itemize}
+Suppose a uniform reaction rate $R=\phi \Sigma_{c,D}$, where $\Sigma_{c,D}=N_D\sigma_{c,D}$.
+\begin{align*}
+    N_D &= \frac{D}{H} \times N_H \\
+    &= \frac{D}{H} (2N_{H_2O}) \\
+    &= 2\frac{D}{H} (\frac{\rho}{M_w}) \\
+    &= 2\times 0.00015\times \frac{750 \mathrm{kg/m^3}\times 1000 \mathrm{g/kg}\times 0.00,0001\mathrm{m^3/cm^3}}{18.015\mathrm{g/mol}}\\
+    N_D &= 0.00001249 \mathrm{mol/cm^3} \\
+    R &= \phi N_D\sigma_{c,D} \\
+    &= 10^{13}\frac{1}{\mathrm{cm^2\cdot s}} \times 1.249\cdot10^{-5}\frac{mol}{\mathrm{cm^3}} \times 506 \mu\mathrm{b}\frac{1\mathrm{cm^2}}{10^{30}\mathrm{\mu b}}\\   
+    R &= 6.3197\cdot10^{-20} \mathrm{\frac{mol}{cm^3\cdot s}}
+\end{align*}
+If uniform water is assumed, a production rate can be found by multiplying this reaction rate across the whole volume of water:
+\begin{align*}
+    \dot{T} &= RVM_t \\
+    &=6.3197\cdot10^{-20} \mathrm{\frac{mol}{cm^3\cdot s}} \times 9.54 \mathrm{m^3\cdot\frac{10^6 cm^3}{m^3}} \times 3.016\mathrm{g/mol} \\
+    &= 1.818\cdot10^{-12} \mathrm{g/s}\cdot\frac{1000\mathrm{mg}}{\mathrm{g}} \cdot \frac{60\cdot60\cdot24\cdot365.25\mathrm{s}}{\mathrm{year}} \\
+    \dot{T} &= 0.057 \mathrm{mg/year}
+\end{align*}
 \end{enumerate}
 
 ({\it Hint: Be very careful with units. The correct answer is within the range 0.03--0.06 mg/year.}).
