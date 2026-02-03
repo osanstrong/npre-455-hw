@@ -78,20 +78,52 @@ where $\phi_0=13.1\times10^{13}$ [1/cm$^2$/s], $R=50$ [cm], $\Sigma_a=0.108$ [1/
 \end{enumerate}
 
 \clearpage
-\noindent 4. ({\bf flux energy spectra}) Download the file {\tt flux\_spectrum1.csv} from Canvas (in Files/Homeworks/HW2). This file contains, in CSV (comma-separated value) format, a neutron energy spectrum in a fission reactor. On each line of this file, the data is formatted as {\tt Emin, Emax, flux}, where {\tt Emin} represents the lower bound of an energy bin, {\tt Emax} represents the upper bound of an energy bin, and {\tt flux} is the measured flux in units of 1/cm$^2$/s. 
-
+\noindent 4. ({\bf flux energy spectra}) Download the file {\tt flux\_spectrum1.csv} from Canvas (in Files/Homeworks/HW2). This file contains, in CSV (comma-separated value) format, a neutron energy spectrum in a fission reactor. On each line of this file, the data is formatted as {\tt Emin, Emax, flux}, where {\tt Emin} represents the lower bound of an energy bin, {\tt Emax} represents the upper bound of an energy bin, and {\tt flux} is the measured flux in units of 1/cm$^2$/s.
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.6\linewidth]{figures/hw2_spec1_bw.png}
+\caption{The flux spectrum given in file \texttt{flux\_spectrum1.csv}, normalized by bin width.}
+\label{fig:spec1_bw}
+\end{figure}
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.6\linewidth]{figures/hw2_spec1_ul.png}
+\caption{The flux spectrum given in file \texttt{flux\_spectrum1.csv}, normalized per unit lethargy.}
+\label{fig:spec1_ul}
+\end{figure}    
 \begin{enumerate}
 \item [(a)] ({\bf 5 points}) Generate two different plots (computer-generated) of this data, both on log-log axes. These two plots should show (i) flux, normalized by the bin widths {\tt Emax - Emin}, as a function of energy; and (ii) flux, normalized per unit lethargy $\ln{(\text{\tt Emax/Emin})}$, as a function of energy. Include labels on your axes.
+
+\begin{itemize}
+    \item Figures~\ref{fig:spec1_bw} and \ref{fig:spec1_ul} show the flux spectrum given in file \texttt{flux\_spectrum1.csv}, as normalized by bin width and by unit lethargy, respectively.
+\end{itemize}
 \item [(b)] ({\bf 3 points}) Describe (qualitatively) the physical process occurring at the large negative spikes in the spectrum. What phrase do we use to describe this phenomenon?
+\begin{itemize}
+    \item At the large negative spikes, the cross section of certain materials is so high that neutrons around this energy are almost immediately absorbed or scattered to a different energy. This phenomenon is called ``energy self-shielding.''
+\end{itemize}
 \item [(c)] ({\bf 2 points}) Is this a thermal-spectrum or fast-spectrum reactor? Explain your answer.
+\begin{itemize}
+    \item I believe this to be a thermal-spectrum reactor. There are two modes, centered at high energy ($10^5$eV), where the prompt neutrons originate, and around low energy ($10^{-1}$eV), with a dip in between where neutrons are efficiently moderated from high to low energy. This seems to correspond to the design of a thermal reactor, where neutrons are produced by fission at high energy, and moderated down to a thermal target range where fission can easily be triggered in the fissile material.
+\end{itemize}
 \end{enumerate}
 
 \clearpage
 \noindent 5. ({\bf flux energy spectra}) Download the file {\tt flux\_spectrum3.csv} from Canvas (in Files/Homeworks/HW2). This file contains, in CSV (comma-separated value) format, a neutron energy spectrum. On each line of this file, the data is formatted as {\tt Emin, Emax, flux}, where {\tt Emin} represents the lower bound of an energy bin, {\tt Emax} represents the upper bound of an energy bin, and {\tt flux} is the measured flux in units of 1/cm$^2$/s. 
-
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.6\linewidth]{figures/hw2_spec3_ul.png}\caption{The flux spectrum given in file \texttt{flux\_spectrum3.csv}, normalized per unit lethargy.}
+\label{fig:spec3_ul}
+\end{figure}
 \begin{enumerate}
 \item [(a)] ({\bf 5 points}) Generate a plot of flux, normalized per unit lethargy $\ln{(\text{\tt Emax/Emin})}$, as a function of energy. Include labels on your axes.
+\begin{itemize}
+    \item Figure~\ref{fig:spec3_ul} shows the flux spectrum given by \texttt{flux\_spectrum3.csv}, as normalized by unit lethargy.
+
+\end{itemize}
 \item [(b)] ({\bf 5 points}) What kind of nuclear system do you think this spectrum corresponds to? Explain your answer.
+\begin{itemize}
+    \item I believe this spectrum corresponds to a fast spectrum reactor. There is only one mode centered at extremely high energy, around 100keV, and the flux at low energies is so low that it drops off and is unrecorded.
+\end{itemize}
 \end{enumerate}
 
 \clearpage
@@ -119,10 +151,11 @@ where $E$ must be in units of MeV. This is not a fun integral to perform by hand
 A midpoint approximation quadrature was chosen over the left endpoint.
 In this quadrature, the average value over a segment was estimated using the midpoint rather than the left endpoint, but was otherwise comparable.\\
 As the distribution does not have a defined upper bound, an arbitrary bound of 18MeV was chosen, by which the probability density was sufficiently low. \\
-The demonstration in Figure~\ref{fig:pdf} may be found at \url{https://www.desmos.com/calculator/6mwqm4ktxj}\\
-\begin{figure}[htb!]\label{fig:pdf}
+The demonstration in Figure~\ref{fig:pdf} may be found at \url{https://www.desmos.com/calculator/6mwqm4ktxj}.
+\begin{figure}[htb!]
 \centering
 \includegraphics[width=1\linewidth]{figures/watt_desmos.png}\caption{A Desmos plot showing the integration of the given Watt probability density function, and that it drops off comfortably before the energy of 18MeV.}
+\label{fig:pdf}
 \end{figure}
 Of note: At the given precision, the coefficient $0.4865$ may not properly normalize the distribution; an integral value of the complete function yeilds a cumulative probability of $100.5\%$, rather than the expected $100\%$.
 \item[(a)] ({\bf 5 points}) Using numeric integration, find the probability that a prompt fission neutron is born between the energies of 1 MeV $\leq E\leq$ 1.1 MeV. 
