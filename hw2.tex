@@ -1,0 +1,248 @@
+\documentclass[11pt]{article}
+\usepackage[hidelinks]{hyperref}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage[acronym,nomain,nonumberlist,nogroupskip,nopostdot]{glossaries} % for glossary of acronyms
+\usepackage{siunitx}
+\usepackage{verbatim}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{threeparttable}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{cancel}
+\usepackage{mathrsfs}
+\usepackage{mhchem}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+\usepackage{xcolor}
+\usepackage{amsmath,mathtools}
+\usepackage{hyperref} % Link to desmos page
+
+\setacronymstyle{long-short}
+
+\newcommand{\mdash}{\discretionary{}{}{\kern 0.1em}---\discretionary{}{}{\kern 0.1em}}
+\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % = `top' strut
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
+\newcommand{\beq}{\begin{equation}\begin{aligned}}
+\newcommand{\eeq}{\end{aligned}\end{equation}}
+\newcommand{\beqs}{\begin{equation*}\begin{aligned}}
+\newcommand{\eeqs}{\end{aligned}\end{equation*}}
+\usepackage{tcolorbox}
+\setlength{\parskip}{5pt}
+
+\begin{document}
+\noindent {\bf \Large NPRE 455: Homework 2}\\
+
+\noindent 1. ({\bf factual concept recall}) Provide a {\it short} (1-2 sentences) answer to each of the following questions.
+
+\begin{enumerate}
+\item[(a)] ({\bf 1 point}) What is ``breeding?'' Give an example using \ce{^{232}Th}.
+\item[(b)] ({\bf 2 points}) What is the difference between a ``multiplying'' system and a ``non-multiplying'' system? Give a real-life example of each.
+\item[(c)] ({\bf 1 point}) What is the name of the evaluated data library developed in the United States?
+\item[(d)] ({\bf 4 points}) What do the four symbols in the four-factor formula represent? Define each one and give a short physical interpretation.
+\item[(e)] ({\bf 2 points}) What is meant by ``spatial self-shielding?''
+\item[(f)] ({\bf 2 points}) Why can it be a poor design choice for a reactor to be over-moderated?
+\end{enumerate}
+
+\clearpage
+\noindent 2. ({\bf reaction rates and definitions}) Under certain circumstances, the neutron flux in a sphere of radius $R$ is given as 
+
+\beq
+\label{eq:flux}
+\phi(r)=\frac{\phi_0R\sin{\left(\frac{\pi r}{R}\right)}}{r}
+\eeq
+
+where $\phi_0=13.1\times10^{13}$ [1/cm$^2$/s], $R=50$ [cm], $\Sigma_a=0.108$ [1/cm], $\Sigma_s=0.21$ [1/cm], and $\Sigma_f=0.0727$ [1/cm].
+
+\begin{enumerate}
+\item[(a)] ({\bf 3 points}) What is the maximum flux in the sphere?
+\item[(b)] ({\bf 3 points}) Plot $\phi(r)$ as a function of $r$. This should be a computer-generated plot, not a hand sketch. Include labels for your axes with units.
+\item[(c)] ({\bf 4 points}) What is the total number of neutrons in the sphere at any given time? You may assume all neutrons are at an energy of 0.025 eV.
+%\item[(d)] ({\bf 4 points}) Estimate the number of neutrons at any given time in 1 cm$^3$ at the center of the sphere, and the number of fissions taking place in 1 second in that volume. ({\it Hint}: what is the radius of this 1 cm$^3$ sphere, and how much does flux from 1(b) vary over that region?)
+%\item[(e)] ({\bf 4 points}) Estimate the rate of energy (W) generated due to fission in a sphere of volume 1 cm$^3$ at the center of the sphere.
+\item[(d)] ({\bf 4 points}) How much power (W) is generated due to fission in the entire sphere?
+\item[(e)] ({\bf 5 points}) At some time later, the power level of the reactor changes. Assuming the flux profile is still governed by Eq. \eqref{eq:flux}, derive the relationship between $\phi_0$ and the power $P$. 
+\item[(f)] ({\bf 2 points}) What is the average distance that a neutron travels between collisions? Find it numerically.
+\end{enumerate}
+
+\clearpage
+\noindent 3. ({\bf deep concept understanding}) For each of the following statements, indicate whether the statement is true or false. Provide an explanation.
+
+\begin{enumerate}
+\item [(a)] ({\bf 5 points}) (True/False) A reactor operating at a steady-state power $P$ can have $k<1$.
+\item [(b)] ({\bf 5 points}) (True/False) A reactor operating at a steady-state power $P$ can have $k>1$.
+\item [(c)] ({\bf 5 points}) (True/False) The non-leakage probability, $P_{nl}$, is only a function of geometry.
+\item [(d)] ({\bf 5 points}) (True/False) Consider a sphere of UO$_2$ initially surrounded by vacuum. You enclose the sphere in a layer of \ce{^{157}Gd}, a strong neutron absorber. $k$ should increase.
+\end{enumerate}
+
+\clearpage
+\noindent 4. ({\bf flux energy spectra}) Download the file {\tt flux\_spectrum1.csv} from Canvas (in Files/Homeworks/HW2). This file contains, in CSV (comma-separated value) format, a neutron energy spectrum in a fission reactor. On each line of this file, the data is formatted as {\tt Emin, Emax, flux}, where {\tt Emin} represents the lower bound of an energy bin, {\tt Emax} represents the upper bound of an energy bin, and {\tt flux} is the measured flux in units of 1/cm$^2$/s. 
+
+\begin{enumerate}
+\item [(a)] ({\bf 5 points}) Generate two different plots (computer-generated) of this data, both on log-log axes. These two plots should show (i) flux, normalized by the bin widths {\tt Emax - Emin}, as a function of energy; and (ii) flux, normalized per unit lethargy $\ln{(\text{\tt Emax/Emin})}$, as a function of energy. Include labels on your axes.
+\item [(b)] ({\bf 3 points}) Describe (qualitatively) the physical process occurring at the large negative spikes in the spectrum. What phrase do we use to describe this phenomenon?
+\item [(c)] ({\bf 2 points}) Is this a thermal-spectrum or fast-spectrum reactor? Explain your answer.
+\end{enumerate}
+
+\clearpage
+\noindent 5. ({\bf flux energy spectra}) Download the file {\tt flux\_spectrum3.csv} from Canvas (in Files/Homeworks/HW2). This file contains, in CSV (comma-separated value) format, a neutron energy spectrum. On each line of this file, the data is formatted as {\tt Emin, Emax, flux}, where {\tt Emin} represents the lower bound of an energy bin, {\tt Emax} represents the upper bound of an energy bin, and {\tt flux} is the measured flux in units of 1/cm$^2$/s. 
+
+\begin{enumerate}
+\item [(a)] ({\bf 5 points}) Generate a plot of flux, normalized per unit lethargy $\ln{(\text{\tt Emax/Emin})}$, as a function of energy. Include labels on your axes.
+\item [(b)] ({\bf 5 points}) What kind of nuclear system do you think this spectrum corresponds to? Explain your answer.
+\end{enumerate}
+
+\clearpage
+\noindent 6. ({\bf probability distribution functions and numerical integration}) $\chi_p(E)$ is a probability distribution function. The following integral represents the probability that a prompt fission neutron is born between energies $E_i$ and $E_{i+1}$.
+
+\beq
+\int_{E_i}^{E_{i+1}}\chi_p(E)dE
+\eeq
+
+An empirical formula (a curve-fit to experimental data) for $\chi_p(E)$ for \ce{^235U} thermal fission is given by the Watt spectrum\footnote{No relation to the unit of ``Watt'' -- this is named after a scientist.},
+
+\beq
+\chi_p(E)=0.4865\sinh(\sqrt{2E})e^{-E}
+\eeq
+
+where $E$ must be in units of MeV. This is not a fun integral to perform by hand. Later in the computer projects, you will use {\it numeric} integration, also called ``quadrature rules,'' to approximate integrals that are too difficult/impossible to do analytically. Numeric integration, at its most basic, seeks to approximate the area under a curve (i.e., the integral) by a sum of approximate areas. The simplest form of numeric integration uses the ``left endpoint approximation,'' illustrated below -- the integral is approximated as the sum of the eight rectangles. The accuracy of this numeric approximation improves the more intervals which are used.
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.3\linewidth]{figures/left_endpoint.png}
+\end{figure}
+
+\begin{itemize}
+\item[] For the following items, a \texttt{python} script \texttt{integrate.py} was created and included in Appendix~\ref{sec:intscript}.
+A midpoint approximation quadrature was chosen over the left endpoint.
+In this quadrature, the average value over a segment was estimated using the midpoint rather than the left endpoint, but was otherwise comparable.\\
+As the distribution does not have a defined upper bound, an arbitrary bound of 18MeV was chosen, by which the probability density was sufficiently low. \\
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=1\linewidth]{figures/watt_desmos.png}\caption{A Desmos plot showing the integration of the given Watt probability density function, and that it drops off comfortably before the energy of 18MeV.}
+\end{figure}
+Of note: At the given precision, the coefficient $0.4865$ may not properly normalize the distribution; an integral value of the complete function yeilds a cumulative probability of $100.5\%$, rather than the expected $100\%$.
+\item[(a)] ({\bf 5 points}) Using numeric integration, find the probability that a prompt fission neutron is born between the energies of 1 MeV $\leq E\leq$ 1.1 MeV. 
+\begin{verbatim}
+>>> import integrate as it
+>>> it.center_integral(it.watt, 1, 1.1, 1000)
+0.034252746522602476
+\end{verbatim}
+$\rightarrow3.425\% $
+\item[(b)] ({\bf 5 points}) Using numeric integration, find the probability that a prompt fission neutron is born with an energy lower than 1 keV.
+\begin{verbatim}
+>>> it.center_integral(it.watt, 0, 0.001, 1000)
+1.4498868445903682e-05
+\end{verbatim}
+$\rightarrow0.01450\% $
+\item[(c)] ({\bf 4 points}) Using numeric integration, find the probability that a prompt fission neutron is born with an energy higher than 3 MeV.
+\\Using the aforementioned upper bound of 18MeV:
+\begin{verbatim}
+>>> it.center_integral(it.watt, 3, 18, 1000)
+0.2134951498454279
+\end{verbatim}
+$\rightarrow 21.35\%$
+\item[(d)] ({\bf 1 point}) What are the units of $\chi_p(E)$?
+\\This function is a probability density function: the integral of $\chi_p(E)$ over energy $E$ should yield a unitless probability.
+Therefore, it would have the reciprocal units of $E$, MeV$^{-1}$.
+This characterizes the midpoint integration as splitting the integral domain into ``slices'' over energy, each of which is multiplied by a corresponding probability \emph{per energy} to yield a total, unitless probability. 
+\end{itemize}
+
+\clearpage
+\noindent 7. ({\bf atom and weight percent review}) Consider UO$_2$ fuel with a density of 10.5 g/cm$^3$. The uranium is 4.5 wt\% (weight percent, also written as ``w/o'') \ce{^{235}U} with the remainder being \ce{^{238}U}. The oxygen is 99.8 at\% (atom percent, also written as ``a/o'') \ce{^{16} O}, with the remainder being \ce{^{18}O}. 
+
+\begin{itemize}
+\item[(a)] ({\bf 12 points}) Calculate the number density of each isotope. Be careful with the difference between atom and weight percent! Report your answer to THREE places after the decimal.\\
+
+{\it Hint}: the number density of \ce{^235U} is between $1\times10^{21}$ atoms/cm$^3$ and $2\times10^{21}$ atoms/cm$^3$.
+\begin{itemize}
+    \item Allow us to first calculate the atom, or molar fraction of uranium-235 in the fuel $n_{235}$, using the relationship between mass $m$, number $n$, and molar mass $M$.
+    \begin{align*}
+        m &= nM \\
+        n &= m/M \\
+        \mathrm{at}\%_{235} &= \frac{n_{235}}{n_{235} + n_{238}} \\
+                            &= \frac{m_{235}/M_{235}}{m_{235}/M_{235} + m_{238}/_{238}} \\
+                            &= \frac{m_{tot}(0.045)/{235}}{m_{tot}(0.045)/M_{235} + m_{tot}(0.955)/_{238}} \\
+                            &= \frac{0.045/235}{0.045/235 + 0.955/238} \\
+                            &= \frac{0.0001915}{0.0001915 + 0.0042040} \\
+                            &= 0.04555 \\
+                            &\rightarrow\mathrm{at}\%_{235} = 0.0455 \\
+    \end{align*}
+    Using this, we may then find the molar mass $M_{UO_2}$ of an ``average'' molecule of UO$_2$:
+    \begin{align*}
+        M_{UO_2} &= M_U + 2\times M_O \\
+        &= (0.04555\times235 + 0.95445\times238) + 2\times(0.998\times16 + 0.002\times18) \\
+        &= 237.863 + 2\times16.004 \\
+        &= 269.871\mathrm{g/mol}
+    \end{align*}
+    And then the number density $N$ of the overall UO$_2$ using the given mass density $\rho$:
+    \begin{align*}
+        N_{UO_2} &= \rho / M_{UO_2} \\
+        &= \frac{10.5 \mathrm{g/cm^3} }{269.871\mathrm{g/mol}} \\
+        &= 0.03891 \mathrm{mol/cm^3} \times 6.022\cdot10^23\mathrm{/mol}
+        &= 2.343\cdot10^22 \mathrm{/cm^3}
+    \end{align*}
+    The number density of each given isotope $i$ of its element $I$ is then the atomic fraction $x_i$ of that isotope times the number of atoms per molecule $\frac{N_I}{N_{UO_2}}$ times this number density of the overall molecule:
+    \begin{align*}
+        N_i &= x_i * \frac{N_I}{N_{UO_2}} * N_{UO_2} \\
+        N_{U235}    &= 0.04555\times 1\times2.343\cdot10^22 \mathrm{/cm^3} &= 1.067\cdot10*21/\mathrm{cm^3} \\
+        N_{U238}    &= 0.95445\times 1\times2.343\cdot10^22 \mathrm{/cm^3} &= 2.236\cdot10*22/\mathrm{cm^3} \\
+        N_{O16} &= 0.998\times 2\times2.343\cdot10^22 \mathrm{/cm^3} &= 4.677\cdot10*22/\mathrm{cm^3} \\
+        N_{O18} &= 0.002\times 2\times2.343\cdot10^22 \mathrm{/cm^3} &= 9.372\cdot10*19/\mathrm{cm^3} \\
+    \end{align*}
+\end{itemize}
+\end{itemize}
+
+\appendix
+\section{Numeric Integration}
+\label{sec:intscript}
+The following \texttt{python} script \texttt{integrate.py} was used to perform the numeric integration in Problem~5:
+\begin{verbatim}
+import numpy as np
+
+# Shortform
+
+def sinh(x):
+    return np.sinh(x)
+
+def sqrt(x):
+    return x**0.5
+
+def exp(x):
+    return np.exp(x)
+
+# The Watt function (not the electric Watt)
+
+def watt(E: float):
+    '''
+    Docstring for watt
+    
+    :param E: Neutron energy. Must be in units of MeV
+    :type E: float
+    '''
+    return 0.4865 * sinh(sqrt(2*E)) * exp(-1*E)
+
+# Integrating procedures
+
+def center_integral(func, a:float, b:float, steps:int):
+    diff = b - a
+    dx = diff / steps
+    sum = 0
+    for i in range(steps): # i.e. excluding b itself
+        left_x = a + (i+0.5)*dx
+        left_val = func(left_x)
+        sum += left_val * dx
+    return sum
+\end{verbatim}
+
+Run from a python terminal as follows:
+\begin{verbatim}
+>>> import integrate as it
+>>> it.center_integral(it.watt, 1, 1.1, 1000000)
+0.034252746516422454
+\end{verbatim}
+
+\end{document}
+
