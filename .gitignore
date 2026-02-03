@@ -6,3 +6,5 @@
 *:mshield
 *:Zone.Identifier
 *.pdf
+**__pycache__**
+.vscode**
