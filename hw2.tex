@@ -119,7 +119,8 @@ where $E$ must be in units of MeV. This is not a fun integral to perform by hand
 A midpoint approximation quadrature was chosen over the left endpoint.
 In this quadrature, the average value over a segment was estimated using the midpoint rather than the left endpoint, but was otherwise comparable.\\
 As the distribution does not have a defined upper bound, an arbitrary bound of 18MeV was chosen, by which the probability density was sufficiently low. \\
-\begin{figure}[htb!]
+The demonstration in Figure~\ref{fig:pdf} may be found at \url{https://www.desmos.com/calculator/6mwqm4ktxj}\\
+\begin{figure}[htb!]\label{fig:pdf}
 \centering
 \includegraphics[width=1\linewidth]{figures/watt_desmos.png}\caption{A Desmos plot showing the integration of the given Watt probability density function, and that it drops off comfortably before the energy of 18MeV.}
 \end{figure}
@@ -190,7 +191,7 @@ This characterizes the midpoint integration as splitting the integral domain int
         N_{U235}    &= 0.04555\times 1\times2.343\cdot10^22 \mathrm{/cm^3} &= 1.067\cdot10*21/\mathrm{cm^3} \\
         N_{U238}    &= 0.95445\times 1\times2.343\cdot10^22 \mathrm{/cm^3} &= 2.236\cdot10*22/\mathrm{cm^3} \\
         N_{O16} &= 0.998\times 2\times2.343\cdot10^22 \mathrm{/cm^3} &= 4.677\cdot10*22/\mathrm{cm^3} \\
-        N_{O18} &= 0.002\times 2\times2.343\cdot10^22 \mathrm{/cm^3} &= 9.372\cdot10*19/\mathrm{cm^3} \\
+        N_{O18} &= 0.002\times 2\times2.343\cdot10^22 \mathrm{/cm^3} &= 9.372\cdot10*19/\mathrm{cm^3} \\    
     \end{align*}
 \end{itemize}
 \end{itemize}
