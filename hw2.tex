@@ -72,9 +72,21 @@ where $\phi_0=13.1\times10^{13}$ [1/cm$^2$/s], $R=50$ [cm], $\Sigma_a=0.108$ [1/
 
 \begin{enumerate}
 \item [(a)] ({\bf 5 points}) (True/False) A reactor operating at a steady-state power $P$ can have $k<1$.
+\begin{itemize}
+    \item \textbf{True}, but only by caveat. If the reactor had a multiplication value $k<1$, then every fission incident will trigger less than one other incident on average, and not sustain a steady reaction. This could be supplemented by an external source which introduced neutrons, thus creating some non-zero power steady state equilibrium.
+\end{itemize}
 \item [(b)] ({\bf 5 points}) (True/False) A reactor operating at a steady-state power $P$ can have $k>1$.
+\begin{itemize}
+    \item \textbf{False}. If just the nebulous $k_\infty$ were $>1$, then leakage might reduce $k$ to around exactly 1. However, without some other factor to lose neutrons, or trigger fewer fusion events per neutron (which would have already been factored into $k$), then this means that $n_t$ fission events at every moment in time are always triggering $n_{t+}>n_t$ fission events in the future, increasing the future power of the reactor. You'd need to suppose a neutron sink that weren't proportional to how many neutrons there are (because this is already factored into $k$), like a magic wand that deletes $10^5$ neutrons per cubic centimeter per second or something.
+\end{itemize}
 \item [(c)] ({\bf 5 points}) (True/False) The non-leakage probability, $P_{nl}$, is only a function of geometry.
+\begin{itemize}
+    \item \textbf{False.} The probability of leakage also depends on the energy distribution itself, and since the probability of what neutrons at what energies leak then goes back to affect multiplication, there's a cyclic dependency such that you can't \emph{practically} separate these factors, only conceptually. 
+\end{itemize}
 \item [(d)] ({\bf 5 points}) (True/False) Consider a sphere of UO$_2$ initially surrounded by vacuum. You enclose the sphere in a layer of \ce{^{157}Gd}, a strong neutron absorber. $k$ should increase.
+\begin{itemize}
+    \item \textbf{True}, especially if the vacuum were infinite to begin with. Even if most of the neutrons that interact with the layer of \ce{^{157}Gd} were absorbed, \emph{all} of the neutrons that went into the vacuum were already \emph{entirely} lost, so any neutrons that are scattered back into the UO$_2$ still increases the multiplication rate $k$.
+\end{itemize}
 \end{enumerate}
 
 \clearpage
