@@ -60,15 +60,31 @@ f(x,y,z)\equiv\int_{4\pi}d\hat{\Omega}\int dE\int dt\ f(x,y,z,t,E,\hat{\Omega})
 \centering
 \includegraphics[width=0.25\linewidth]{figures/hw3Q_pc.png}
 \end{figure}
-\item[] The partial current $J_-$, entering the control volume, is shown.
+\item[] \ans{The partial current $J_-$, entering the control volume, is shown.}
 
 \item[(g)] ({\bf 2 points}) What is the difference between $\sigma_s(E)$ and $\sigma_s(E\rightarrow E')$? Do they have the same units?
-\item[] While the two are both microscopic cross-sections with the same units, $\sigma_s(E)$ represents the cross-section of a neutron with energy $E$ scattering at all, where $\sigma_s(E\rightarrow E')$ represents its cross-section to scatter to a \emph{specific energy $E'$}. $\sigma_s(E)$ would be equivalent to integrating $\sigma_s(E\rightarrow E')$ over the product energy $E'$.
+\item[]\ans{While the two are both microscopic cross-sections with the same units, $\sigma_s(E)$ represents the cross-section of a neutron with energy $E$ scattering at all, where $\sigma_s(E\rightarrow E')$ represents its cross-section to scatter to a \emph{specific energy $E'$}. $\sigma_s(E)$ would be equivalent to integrating $\sigma_s(E\rightarrow E')$ over the product energy $E'$.}
 \item[(h)] ({\bf 3 points}) List at least 3 assumptions that are made when deriving the neutron transport equation. Are these very severe assumptions?
-\item[] 
+\item[] \ans{\begin{itemize}
+    \item Neutrons only move in straight lines between collisions, such that only collisions change their energy and direction. This wouldn't work if, for example, they were charged like protons.
+    \item We neglect free neutron decay, which has a half life of approximately 10 minutes. This works well because neutrons are really fast, so they don't take \emph{nearly} that long to hit something or leave our system.
+    \item We neglect neutron-on-neutron collisions. This works well because neutrons are a lot smaller and harder to collide with than the atoms in the material.
+    \item Collisions are instantaneous. This is noteworthy, but the actual times are small enough that they shouldn't change much. 
+\end{itemize}
+All of these assumptions are not very severe; they don't change very much from the most rigorous model.
+}
 \item[(i)] ({\bf 2 points}) Describe the process by which the diffusion equation is derived from the neutron transport equation. What did we have to assume about the angular flux?
-\item[] By far the greatest assumption which simplifies the neutron transport equation to the neutron diffusion equation is the assumption that angular flux is \emph{linearly anisotropic}, that is, while not necessarily perfectly uniform over angle, it can at least be described by a linear function of angle.
+\item[] \ans{The neutron diffusion equation is found by taking two moments, an integral over angle (zeroth moment) and an integral of the function times angle, over angle (first moment), but also introducing a simplifying assumption so that these moments can yield a much nicer equation. This is by far the greatest assumption which simplifies the neutron transport equation to the neutron diffusion equation: that angular flux is \emph{linearly anisotropic}, that is, while not necessarily perfectly uniform over angle, it can at least be described by a linear function of angle.}
 \item[(j)] ({\bf 3 points}) List at least 3 scenarios where the diffusion equation may give inaccurate predictions.
+\item[] \ans{
+    The neutron diffusion equation notably fails in at least the following scenarios:
+    \begin{itemize}
+        \item Media without scattering, such as a vacuum.
+        \item Near strong sources or sinks of neutrons: there is a strong preferential direction for neutrons which breaks our nice linear anisotropy.
+        \item Strong spatial variations in general tend to introduce stronger angular dependence than our assumption permits.
+        \item Near (within several mean free paths of) problematic boundaries or discontinuities, such as a vacuum, where neutrons that scatter in that direction wouldn't come back.
+    \end{itemize}
+}
 \end{itemize}
 
 \clearpage
