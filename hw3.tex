@@ -29,34 +29,45 @@
 \newcommand{\eeq}{\end{aligned}\end{equation}}
 \newcommand{\beqs}{\begin{equation*}\begin{aligned}}
 \newcommand{\eeqs}{\end{aligned}\end{equation*}}
+\newcommand{\ans}[1]{{\color{violet}#1}}
 
 \setlength{\parskip}{5pt}
 
 \begin{document}
 \noindent {\bf \Large NPRE 455: Homework 3}\\
+\noindent {\bf Owen Strong \hfill Feb. 12, 2026}
 
 \noindent 1. ({\bf factual concept recall}) Provide a {\it short} (1-2 sentences) answer to each of the following questions.
 
 \begin{itemize}
 \item[(a)] ({\bf 2 points}) If $\hat{n}$ is an outward facing normal for a control volume, describe the meaning when the neutron current vector $\vec{j}$ dotted with $\hat{n}$ is (i) positive, (ii) negative, or (iii) zero.
+\item[] \ans{When the product is positive, the net current is leaving the volume at that point on the surface. When the product is negative, it is entering the volume, and when zero, it is tangential, neither entering nor exiting.}
 \item[(b)] ({\bf 1 point}) If $f(x,y,z,t,E,\hat{\Omega})$ has units of $\gamma$, what are the units of the following term?
 
 \beq
 f(x,y,z)\equiv\int_{4\pi}d\hat{\Omega}\int dE\int dt\ f(x,y,z,t,E,\hat{\Omega})
 \eeq
+\item[] \ans{It is integrated over dimensionally significant variables $t$ and $E$, resulting in a quantity with units dimensionally equivalent to $\gamma\cdot s\cdot eV$.}
 \item[(c)] ({\bf 1 point}) What is the difference between a radian and a steradian?
+\item[] \ans{Where a radian describes 1D angular procession around a unit circle, a steradian describes the 2D angular coverage over a unit sphere, akin to a field of view.}
 \item[(d)] ({\bf 1 point}) Explain the physical meaning of a quantity which is {\it isotropic}.
+\item[] \ans{If a quantity is isotropic, then it is uniform with respect to angle. Integrating such a function over all angles is equivalent to scaling it by $4\pi$.}
 \item[(e)] ({\bf 4 points}) Scalar current $\vec{J}$ and scalar flux $\phi$ have the same units. Provide a qualitative discussion of what each term represents, and describe any differences between the two quantities.
+\item[] \ans{Dimensionally, both correspond to a number of crossings of unit surfaces per second, or distance traveled per unit volume per second (i.e. accounting for faster neutrons hitting things more frequently), but where scalar flux represents the ``gross'' distance traveled by neutrons regardless of direction, scalar \emph{current} is the integral of ``net'' distance traveled, where neutrons moving in opposite directions could cancel each other out. For example, in a uniform isotropic flux field, there could be gazillions of neutrons traveling at ludicrous speed (high scalar flux), but because there wouldn't be any \emph{net} procession of neutrons, the scalar current would be effectively zero.}
 \item[(f)] ({\bf 1 point}) Consider a surface below, with unit normal shown. Which partial current, $J_+$ or $J_-$, is shown as the red arrow?
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.25\linewidth]{figures/pc.png}
+\includegraphics[width=0.25\linewidth]{figures/hw3Q_pc.png}
 \end{figure}
+\item[] The partial current $J_-$, entering the control volume, is shown.
 
 \item[(g)] ({\bf 2 points}) What is the difference between $\sigma_s(E)$ and $\sigma_s(E\rightarrow E')$? Do they have the same units?
+\item[] While the two are both microscopic cross-sections with the same units, $\sigma_s(E)$ represents the cross-section of a neutron with energy $E$ scattering at all, where $\sigma_s(E\rightarrow E')$ represents its cross-section to scatter to a \emph{specific energy $E'$}. $\sigma_s(E)$ would be equivalent to integrating $\sigma_s(E\rightarrow E')$ over the product energy $E'$.
 \item[(h)] ({\bf 3 points}) List at least 3 assumptions that are made when deriving the neutron transport equation. Are these very severe assumptions?
+\item[] 
 \item[(i)] ({\bf 2 points}) Describe the process by which the diffusion equation is derived from the neutron transport equation. What did we have to assume about the angular flux?
+\item[] By far the greatest assumption which simplifies the neutron transport equation to the neutron diffusion equation is the assumption that angular flux is \emph{linearly anisotropic}, that is, while not necessarily perfectly uniform over angle, it can at least be described by a linear function of angle.
 \item[(j)] ({\bf 3 points}) List at least 3 scenarios where the diffusion equation may give inaccurate predictions.
 \end{itemize}
 
@@ -65,7 +76,7 @@ f(x,y,z)\equiv\int_{4\pi}d\hat{\Omega}\int dE\int dt\ f(x,y,z,t,E,\hat{\Omega})
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.3\linewidth]{figures/hw2_flux.png}
+\includegraphics[width=0.3\linewidth]{figures/hw3Q_flux.png}
 \end{figure}
 
 \begin{enumerate}
@@ -86,7 +97,7 @@ f(x,y,z)\equiv\int_{4\pi}d\hat{\Omega}\int dE\int dt\ f(x,y,z,t,E,\hat{\Omega})
 
 \begin{figure}[htb!]
 \centering
-\includegraphics[width=0.4\linewidth]{figures/star.png}
+\includegraphics[width=0.4\linewidth]{figures/hw3Q_star.png}
 \end{figure}
 
 \begin{itemize}
