@@ -1,4 +1,4 @@
-manuscript = hw2
+manuscript = hw3
 references = $(wildcard *.bib)
 latexopt   = -halt-on-error -file-line-error
 

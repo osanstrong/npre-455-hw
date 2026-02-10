@@ -1,0 +1,163 @@
+\documentclass[11pt]{article}
+\usepackage[hidelinks]{hyperref}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage[acronym,nomain,nonumberlist,nogroupskip,nopostdot]{glossaries} % for glossary of acronyms
+\usepackage{siunitx}
+\usepackage{verbatim}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{threeparttable}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{cancel}
+\usepackage{mathrsfs}
+\usepackage{mhchem}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+\usepackage{xcolor}
+\usepackage{amsmath,mathtools}
+\newcommand{\hO}{\hat{\Omega}}
+
+\setacronymstyle{long-short}
+
+\newcommand{\mdash}{\discretionary{}{}{\kern 0.1em}---\discretionary{}{}{\kern 0.1em}}
+\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % = `top' strut
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
+\newcommand{\beq}{\begin{equation}\begin{aligned}}
+\newcommand{\eeq}{\end{aligned}\end{equation}}
+\newcommand{\beqs}{\begin{equation*}\begin{aligned}}
+\newcommand{\eeqs}{\end{aligned}\end{equation*}}
+
+\setlength{\parskip}{5pt}
+
+\begin{document}
+\noindent {\bf \Large NPRE 455: Homework 3}\\
+
+\noindent 1. ({\bf factual concept recall}) Provide a {\it short} (1-2 sentences) answer to each of the following questions.
+
+\begin{itemize}
+\item[(a)] ({\bf 2 points}) If $\hat{n}$ is an outward facing normal for a control volume, describe the meaning when the neutron current vector $\vec{j}$ dotted with $\hat{n}$ is (i) positive, (ii) negative, or (iii) zero.
+\item[(b)] ({\bf 1 point}) If $f(x,y,z,t,E,\hat{\Omega})$ has units of $\gamma$, what are the units of the following term?
+
+\beq
+f(x,y,z)\equiv\int_{4\pi}d\hat{\Omega}\int dE\int dt\ f(x,y,z,t,E,\hat{\Omega})
+\eeq
+\item[(c)] ({\bf 1 point}) What is the difference between a radian and a steradian?
+\item[(d)] ({\bf 1 point}) Explain the physical meaning of a quantity which is {\it isotropic}.
+\item[(e)] ({\bf 4 points}) Scalar current $\vec{J}$ and scalar flux $\phi$ have the same units. Provide a qualitative discussion of what each term represents, and describe any differences between the two quantities.
+\item[(f)] ({\bf 1 point}) Consider a surface below, with unit normal shown. Which partial current, $J_+$ or $J_-$, is shown as the red arrow?
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.25\linewidth]{figures/pc.png}
+\end{figure}
+
+\item[(g)] ({\bf 2 points}) What is the difference between $\sigma_s(E)$ and $\sigma_s(E\rightarrow E')$? Do they have the same units?
+\item[(h)] ({\bf 3 points}) List at least 3 assumptions that are made when deriving the neutron transport equation. Are these very severe assumptions?
+\item[(i)] ({\bf 2 points}) Describe the process by which the diffusion equation is derived from the neutron transport equation. What did we have to assume about the angular flux?
+\item[(j)] ({\bf 3 points}) List at least 3 scenarios where the diffusion equation may give inaccurate predictions.
+\end{itemize}
+
+\clearpage
+\noindent 2. ({\bf angular definitions}) A mono-energetic beam of neutrons has a number density of $n$ [neutrons/cm$^{3}$/eV/sr] and velocity $v$ [cm/s] is traveling in the direction $1\hat{x}$. 
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.3\linewidth]{figures/hw2_flux.png}
+\end{figure}
+
+\begin{enumerate}
+\item [(a)] ({\bf 5 points}) What is the angular current $\vec{j}$?
+\item [(b)] ({\bf 5 points}) What is the net rate at which neutrons pass through a surface of area $A$ cm$^2$ inclined at an angle $\varphi$ relative to the $x$-axis? This surface is shown as the diagonal black line above.
+\end{enumerate}
+
+\clearpage
+\noindent 3. ({\bf current and flux definitions}) A small source of \ce{^252Cf} is placed at the origin; it is so small, that we can treat it as a point. The source emits $S$ [neutrons/s] isotropically in an infinite vacuum.
+
+\begin{itemize}
+\item[(a)] ({\bf 4 points}) What is the total current, $\vec{J}(r)$, at a distance $r$ from the source?
+\item[(b)] ({\bf 4 points}) What is the total flux, $\phi(r)$, at a distance $r$ from the source?
+\end{itemize}
+
+\clearpage
+\noindent 4. ({\bf current and flux definitions}) Three isotropic neutron sources, each emitting $S$ [neutrons/s], are located in an infinite vacuum at the three corners of an equilateral triangle of side length $a$. All of the neutrons have the same energy.
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.4\linewidth]{figures/star.png}
+\end{figure}
+
+\begin{itemize}
+\item[(a)] ({\bf 5 points}) Find the scalar current $\vec{J}$ at the midpoint of one side (indicated with a star).
+\item[(b)] ({\bf 5 points}) Find the scalar flux $\phi$ at the midpoint of one side (indicated with a star).
+\end{itemize}
+
+\clearpage
+\noindent 5. ({\bf isotropy}) Consider a system with an isotropic angular flux.
+
+\begin{enumerate}
+\item[(a)] ({\bf 5 points}) Show that the scalar current is zero. 
+\item[(b)] ({\bf 2 points}) Describe the physical meaning of a zero scalar current.
+\end{enumerate}
+
+\clearpage
+\noindent 6. ({\bf diffusion approximation}) The P$_1$ approximation is equivalent to assuming that the angular flux is linearly anisotropic:
+
+\beq
+\label{eq:p1}
+\psi(\vec{r},E,\hO,t)=&\ A_0(\vec{r},E,t)+B_1(\vec{r},E,t)\Omega_x+B_2(\vec{r},E,t)\Omega_y+B_3(\vec{r},E,t)\Omega_z+C_1(\vec{r},E,t)\Omega_x\Omega_x+\cdots\\
+\approx&\ A_0(\vec{r},E,t)+\underbrace{B_1(\vec{r},E,t)\Omega_x+B_2(\vec{r},E,t)\Omega_y+B_3(\vec{r},E,t)\Omega_z}_{\vec{B}\cdot\hO}
+\eeq
+
+\begin{enumerate}
+\item[(a)] ({\bf 5 points EXTRA CREDIT}) Derive the functions $A_0$, $B_1$, $B_2$, and $B_3$ by taking the zeroth and first moments of Eq. \eqref{eq:p1} with respect to $\hO$. (Hint: $\int_{4\pi}d\hO\Omega_i=0$ and $\int_{4\pi}d\hO\ \vec{w}\cdot\hO\hO=4\pi\vec{w}/3$.) For your final answer, write Eq. \eqref{eq:p1} with these terms inserted.
+\item[(b)] ({\bf 10 points EXTRA CREDIT}) Derive the expression for the partial scalar current $J_+$ by inserting the P$_1$ approximation (your answer to question \#1) into the following expression for $J_+$:
+\beq
+\label{eq:Jp}
+J_+=\int_{2\pi^+}d\hO\psi(\vec{r},E,\hO,t)\hO\cdot\hat{n}
+\eeq
+
+The $2\pi^+$ is shorthand notation to indicate we are doing the integral over the top hemisphere (for $0\leq\theta\leq\pi/2$), as opposed to the bottom hemisphere, $2\pi^-$. You do not need to perform the integrals by hand (you can use a tool such as Wolfram Alpha), but do write out the full expression and keep your work clear.
+\end{enumerate}
+
+\clearpage
+\noindent 7. ({\bf deep concept understanding}) For each of the following statements, indicate whether the statement is true or false. Provide an explanation.
+
+\begin{enumerate}
+\item[(a)] ({\bf 5 points}) (True/False) The diffusion equation is the same as assuming that the angular flux is isotropic.
+\item[(b)] ({\bf 5 points}) (True/False) The diffusion equation can be applied to predict neutron flux in a vacuum.
+\end{enumerate}
+
+\clearpage
+\noindent 8. ({\bf flux and current definitions, neutron balance}) Under certain circumstances, the neutron flux in a sphere of radius $R$ is given as 
+
+\beq
+\label{eq:flux}
+\phi(r)=\frac{\phi_0R\sin{\left(\frac{\pi r}{R}\right)}}{r}
+\eeq
+
+where $\phi_0=13.1\times10^{13}$ [1/cm$^2$/s], $R=50$ [cm], $\Sigma_a=0.108$ [1/cm], $\Sigma_f=0.0727$ [1/cm], $D=1.1$ [cm], and $\nu=2.4$. All of the neutrons are at the same energy.
+
+\begin{enumerate}
+\item[(a)] ({\bf 5 points}) Obtain the expression for the scalar current $\vec{J}$ at a point on the surface of the sphere, assuming diffusion theory applies.
+\item[(b)] ({\bf 5 points}) Plot (with a computer) $\vec{J}\cdot\hat{r}$ from $0\leq r\leq R$. Label your axes. Explain the behavior you see at $r=0$.
+\item[(c)] ({\bf 5 points}) What is the rate (1/s) of neutrons which leak from the surface of the sphere?
+\item[(d)] ({\bf 5 points}) What is the net number of neutrons crossing the spherical surface at $r=R/2$ per second?
+\item[(e)] ({\bf 10 points}) Consider a thin spherical shell between $R/2-0.5\text{cm}<r<R/2+0.5\text{cm}$. Estimate the rate of neutrons being (i) absorbed in this shell, (ii) generated in this shell, and (iii) entering or leaving the shell through the surfaces. Carry out a neutron balance using these numbers. Be clear about your assumptions; if there is any ``discrepancy'' between sources and losses, explain why it exists and what to change about your calculation to make the discrepancy smaller.
+\end{enumerate}
+
+\clearpage
+\noindent 9. ({\bf solid angle integration}) Consider a function $f(\theta,\varphi)=\theta\varphi^2$. 
+
+\beq
+\int_{4\pi}d\hat{\Omega} f(\theta,\varphi)
+\eeq
+
+\begin{itemize}
+\item[(a)] ({\bf 5 points}) Evaluate the above integral.
+\end{itemize}
+
+\end{document}
+
