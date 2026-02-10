@@ -16,8 +16,7 @@
 \usepackage{mhchem}
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
-\usepackage{xcolor}
-\usepackage{amsmath,mathtools}
+\usepackage{xcolor,amsmath,mathtools}
 \usepackage{hyperref} % Link to desmos page
 
 \setacronymstyle{long-short}
@@ -29,21 +28,28 @@
 \newcommand{\eeq}{\end{aligned}\end{equation}}
 \newcommand{\beqs}{\begin{equation*}\begin{aligned}}
 \newcommand{\eeqs}{\end{aligned}\end{equation*}}
+\newcommand{\abrack}[1]{\langle#1\rangle}
 \usepackage{tcolorbox}
 \setlength{\parskip}{5pt}
 
 \begin{document}
-\noindent {\bf \Large NPRE 455: Homework 2}\\
+\noindent {\bf \Large NPRE 455: Homework 2} Owen Strong, ostrong2, 661893247\\
 
 \noindent 1. ({\bf factual concept recall}) Provide a {\it short} (1-2 sentences) answer to each of the following questions.
 
 \begin{enumerate}
 \item[(a)] ({\bf 1 point}) What is ``breeding?'' Give an example using \ce{^{232}Th}.
+\item[] Breeding is using excess neutrons to convert fertile nuclei to fissile nuclei. For example, in a thorium breeder reactor, \ce{^{232}Th} nuclei are struck by neutrons, and after absorbing a neutron \ce{^{233}Th} will decay to \ce{^{233}U}, which itself is fissile. 
 \item[(b)] ({\bf 2 points}) What is the difference between a ``multiplying'' system and a ``non-multiplying'' system? Give a real-life example of each.
+\item[] In a multiplying system, such as a fission reactor (Clinton Generating Station), neutrons produced by the nuclear reaction are also what trigger further reaction events, leading to a chain reaction. Conversely, in a non-multiplying system like a fusion reactor (JET), the product neutrons are not themselves one of the inputs to new reaction events, and these may often be treated as ``fixed-source'' neutronics problems.
 \item[(c)] ({\bf 1 point}) What is the name of the evaluated data library developed in the United States?
+\item[] The ENDF data library is maintained at Brookhaven National Laboratory.
 \item[(d)] ({\bf 4 points}) What do the four symbols in the four-factor formula represent? Define each one and give a short physical interpretation.
+\item[] In the four factor formula $k=\epsilon pf\eta$, the fast fission factor $\epsilon=\frac{\abrack{\nu\Sigma_f\phi}}{\abrack{\nu\Sigma_f\phi}^{th}}$ represents an added bonus for fast fission (the ratio of fast+thermal fission to just thermal fission), the resonance escape probability $p=frac{\abrack{\Sigma_a\phi}^{th}}{\abrack{\Sigma_a\phi}}$ represents the ratio of neutrons which are slowed down from fast to thermal energies without being absorbed to all neutrons produced, the thermal utilization factor $f=frac{\abrack{\Sigma_a\phi}^{th}_{fuel}}{\abrack{\Sigma_a\phi}^{th}}$ represents the fraction of thermal neutrons which are then absorbed by the fuel as opposed to other materials, and the production-absorption ratio $\nu=\frac{\abrack{\nu\Sigma_f\phi}^{th}_{fuel}}{\abrack{\Sigma_a\phi}^{th}_{fuel}}$ represents the average number of neutrons produced by fission reactions for every thermal neutron that is absorbed by the fuel.
 \item[(e)] ({\bf 2 points}) What is meant by ``spatial self-shielding?''
+\item[] Spatial self-shielding refers to the difference in behavior because neutrons may interact differently with spatially different components of the reactor. Neutrons might, in region A, undergo several different types of reactions and only \emph{then} enter region B, which would be different than if the components of A and B were homogenously mixed.
 \item[(f)] ({\bf 2 points}) Why can it be a poor design choice for a reactor to be over-moderated?
+\item[] If a reactor is overmoderated, then removing moderator increases the reaction rate of the reactor. For a water-moderated reactor, where increased reactor power might just boil away and remove even \emph{more} water in a positive feedback loop, this is what we in the business call, uh, \emph{suboptimal}.
 \end{enumerate}
 
 \clearpage
@@ -58,13 +64,123 @@ where $\phi_0=13.1\times10^{13}$ [1/cm$^2$/s], $R=50$ [cm], $\Sigma_a=0.108$ [1/
 
 \begin{enumerate}
 \item[(a)] ({\bf 3 points}) What is the maximum flux in the sphere?
+\begin{itemize}
+    \item To find the location with maximum flux, allow us to first find the spatial derivative of $\phi(r)$ using the quotient rule:
+    \begin{align*}
+        \phi(r)&=\frac{\phi_0R\sin{\left(\frac{\pi r}{R}\right)}}{r} \\
+        \phi'(r)&=\left[\frac{\phi_0R\sin{\left(\frac{\pi r}{R}\right)}}{r}\right]' \\
+        \color{gray}\left[\frac{f(x)}{g(x)}\right]'&\color{gray}=\frac{f'(x)g(x) - f(x)g'(x)}{(g(x))^2}\color{black} \\
+        \phi'(r)&=\phi_0R\left[\frac{\sin{\left(\frac{\pi r}{R}\right)}}{r}\right]' \\
+        &=\phi_0R\left[\frac{\frac{\pi}{R}\cos{\left(\frac{\pi r}{R}\right)r - \sin{\left(\frac{\pi r}{R}\right)}}}{r^2}\right] \\
+        &=\phi_0R\left[\frac{\pi\cos{\left(\frac{\pi r}{R}\right)}}{Rr} - \frac{\sin{\left(\frac{\pi r}{R}\right)}}{r^2}\right] \\
+        \phi'(r)&=\phi_0\frac{R}{r}\left[\frac{\pi\cos{\left(\frac{\pi r}{R}\right)}}{R} - \frac{\sin{\left(\frac{\pi r}{R}\right)}}{r}\right] \\
+    \end{align*}
+    then find where this derivative is equal to 0:
+    \begin{align*}
+        \phi'(r)=0&=\phi_0\frac{R}{r}\left[\frac{\pi\cos{\left(\frac{\pi r}{R}\right)}}{R} - \frac{\sin{\left(\frac{\pi r}{R}\right)}}{r}\right] \\
+        0 &= \frac{\pi\cos{\left(\frac{\pi r}{R}\right)}}{R} - \frac{\sin{\left(\frac{\pi r}{R}\right)}}{r}\color{gray}\ (\mathrm{finite\ }r) \\
+        \frac{\pi\cos{\left(\frac{\pi r}{R}\right)}}{R} &= \frac{\sin{\left(\frac{\pi r}{R}\right)}}{r} \\
+        \pi\cos{\left(\frac{\pi r}{R}\right)}r &= \sin{\left(\frac{\pi r}{R}\right)}R\\
+    \end{align*}
+    since $\sin(x)=0$ and $\cos(x)=0$ do not coincide,
+    \begin{align*}
+        \pi\cos{\left(\frac{\pi 0}{R}\right)}0 &= \sin{\left(\frac{\pi 0}{R}\right)}R\\
+        0&=0 \\
+        &\rightarrow r=0
+    \end{align*}
+    Then, by taking the limit as $\phi(r)$ approaches 0, we find the maximum flux:
+    \begin{align*}
+        \phi(0)&=\phi_0R\frac{\sin{\left(\frac{\pi r}{R}\right)}}{r} |_{r=0}\\
+        \lim_{r\rightarrow0}\phi(r)&=\phi_0R\frac{[\sin{\left(\frac{\pi r}{R}\right)}]'}{[r]'} |_{r=0}\\
+        &=\phi_0R\frac{\frac{\pi}{R}\cos{\left(\frac{\pi r}{R}\right)}}{1} |_{r=0}\\
+        &=\phi_0R\frac{\pi}{R}\\
+        &=\phi_0\pi\\
+        \color{gray}\phi_0&\color{gray}=13.1\times10^{13}\text{[1/cm$^2$/s]} \\
+        &=\pi\times13.1\times10^{13}\text{[1/cm$^2$/s]} \\
+        &=4.12\times10^{14}\text{[1/cm$^2$/s]} \\   
+    \end{align*}
+\end{itemize}
 \item[(b)] ({\bf 3 points}) Plot $\phi(r)$ as a function of $r$. This should be a computer-generated plot, not a hand sketch. Include labels for your axes with units.
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/hw2_p2flux.png}
+\caption{The flux spectrum $\phi(r)$.}
+\label{fig:p2flux}
+\end{figure}
+\begin{itemize}
+    \item Figure~\ref{fig:p2flux} shows $\phi(r)$ from $r=0$cm to $r=50$cm.
+\end{itemize}
 \item[(c)] ({\bf 4 points}) What is the total number of neutrons in the sphere at any given time? You may assume all neutrons are at an energy of 0.025 eV.
+\begin{itemize}
+    \item If we assume all neutrons have kinetic energy 0.025 eV:
+    \begin{align*}
+        E_k = 0.025\text{eV} &= 4.005441\cdot10^{-21}\text{J} = \frac{1}{2}mv^2\\
+        &\color{gray}m_n=1.675\cdot10^{-27}\text{kg }\\
+        v^2&=\frac{2\times 4.005441\cdot10^{-21}\text{J}}{1.675\cdot10^{-27}\text{kg}} \\
+        &\color{gray}\mathrm{J=kg\frac{m^2}{s^2}}\\
+        v^2&= 4.783\cdot10^{6}\mathrm{\frac{m^2}{s^2}} \\
+        v&=2187\mathrm{\frac{m}{s}}=2.187\cdot10^5 \mathrm{\frac{cm}{s}}\\
+    \end{align*}
+    and total flux $\phi$ is equivalent to neutron count times speed:
+    \begin{align*}
+        \int_V\phi&=\int_VNv \\
+        &=\int_{0}^{\pi}\int_{0}^{2\pi}\int_{0}^{R}\frac{\phi_0R\sin{\left(\frac{\pi r}{R}\right)}}{r}r^2sin(\theta)dr d\theta d\varphi\\
+        &=4\pi\phi_0R\int_{0}^{R}\sin{\left(\frac{\pi r}{R}\right)}rdr\\
+        &=4\pi\phi_0R\left.\left[\int\sin{\left(\frac{\pi r}{R}\right)}r\right]\right\vert_0^R\\
+        &=4\pi\phi_0R\left.\left[-\frac{R}{\pi}\cos{\left(\frac{\pi r}{R}\right)r}-\int-\frac{R}{\pi}\cos{\left(\frac{\pi r}{R}\right)}\right]\right\vert_0^R\\
+        &=4\pi\phi_0R\left.\left[\frac{R^2}{\pi^2}\sin{\left(\frac{\pi r}{R}\right)}-\frac{R}{\pi}\cos{\left(\frac{\pi r}{R}\right)r}\right]\right\vert_0^R\\
+        &=4\pi\phi_0R\left[\frac{R^2}{\pi^2}\sin{\left(\pi\right)}-\frac{R}{\pi}\cos{\left(\pi\right)}R - \frac{R^2}{\pi^2}\sin{\left(0\right)}+\frac{R}{\pi}\cos{\left(0\right)}0\right]\\
+        &=4\pi\phi_0R\left[\frac{R^2}{\pi}\right]\\
+        \int_V\phi&=4\phi_0R^3\\
+        &=4\times13.1\times10^{13}\mathrm{[/cm^2/s]}\times(50\mathrm{[cm]})^3\\
+        \int_V\phi&=6.55\cdot10^{19}\mathrm{[cm/s]}=\int_VNv \\
+        \int_VN&=\frac{1}{v}\int_V\phi \\
+        &=\frac{6.55\cdot10^{19}\mathrm{[cm/s]}}{2.187\cdot10^5 \mathrm{[cm/s]}} \\
+        &=2.995\cdot10^{14}
+        % &=\frac{1}{v} \int_{0}^{R}\frac{\phi_0R\sin{\left(\frac{\pi r}{R}\right)}}{r}rdr \\
+        % &=\frac{\phi_0R}{v} \int_{0}^{R}\sin{\left(\frac{\pi r}{R}\right)}dr \\
+        % &=\frac{\phi_0R}{v}\left[-\frac{R}{\pi}\cos{\left(\frac{\pi r}{R}\right)}\right]|_0^R \\
+        % &=\frac{\phi_0R}{v}\frac{R}{\pi}\left[\cos{\left(\frac{\pi R}{R}\right)}-\cos{\left(\frac{\pi 0}{R}\right)}\right] \\
+        % &=\frac{\phi_0R}{v}\frac{R}{\pi}\left[1-0\right] \\
+        % &=\frac{13.1\times10^{13}\text{[1/cm$^2$/s]} \times (50\mathrm{[cm]})^2}{\pi\times 2.187\cdot10^5 \mathrm{\frac{cm}{s}}} \\
+        % \phi&=
+    \end{align*}
+\end{itemize}
 %\item[(d)] ({\bf 4 points}) Estimate the number of neutrons at any given time in 1 cm$^3$ at the center of the sphere, and the number of fissions taking place in 1 second in that volume. ({\it Hint}: what is the radius of this 1 cm$^3$ sphere, and how much does flux from 1(b) vary over that region?)
 %\item[(e)] ({\bf 4 points}) Estimate the rate of energy (W) generated due to fission in a sphere of volume 1 cm$^3$ at the center of the sphere.
 \item[(d)] ({\bf 4 points}) How much power (W) is generated due to fission in the entire sphere?
+\begin{itemize}
+    \item Using the derivation from problem (c), $\int_V\phi=4\phi_0R^3=6.55\cdot10^{19}\mathrm{[cm/s]}$. Using the reaction rate of a phenomenon $i$ $R_i=\phi\Sigma_i$, and assuming a reaction energy $Q_f$ of 200MeV (or $3.20\cdot10^{-11}$J):
+    \begin{align*}
+        P&=\int_{V}Q_fR_f \\
+        &=\int_{V}Q_f\Sigma_f\phi \\
+        &=Q_f\Sigma_f\int_{V}\phi\\
+        &=3.20\cdot10^{-11}\mathrm{[J]}\times 0.0727\mathrm{[/cm]} \times6.55\cdot10^{19}\mathrm{[cm/s]} \\
+        &= 1.52\cdot10^8\mathrm{[W]} \\
+    \end{align*}
+\end{itemize}
 \item[(e)] ({\bf 5 points}) At some time later, the power level of the reactor changes. Assuming the flux profile is still governed by Eq. \eqref{eq:flux}, derive the relationship between $\phi_0$ and the power $P$. 
+\begin{itemize}
+    \item At any given point in time, $R_f=\phi\Sigma_f$ fission reactions take place per unit volume, each producing a certain energy $Q_f$. Generalizing this relationship:
+    \begin{align*}
+        P&=\int_{V}Q_fR_f \\
+        &=\int_{V}Q_f\Sigma_f\phi \\
+        &=Q_f\Sigma_f\int_{V}\phi\\
+        &=Q_f\Sigma_f\times4\phi_0R^3\\
+        P&=4Q_f\Sigma_fR^3\phi_0
+    \end{align*}
+\end{itemize}
 \item[(f)] ({\bf 2 points}) What is the average distance that a neutron travels between collisions? Find it numerically.
+\begin{itemize}
+    \item The \emph{mean free path} of a neutron is the inverse of the macrosocopic cross section $\Sigma_t$ for collisions of any type.
+    \begin{align*}
+        \Sigma_t&=\Sigma_a+\Sigma_s \\
+        &=0.108+0.21=0.318\mathrm{[1/cm]} \\
+        \mathrm{mfp}&=\frac{1}{\Sigma_t} \\
+        &= \frac{1}{0.318\mathrm{[1/cm]}} \\
+        &= 3.145\mathrm{[cm]} \\
+    \end{align*}
+\end{itemize}
 \end{enumerate}
 
 \clearpage
@@ -81,7 +197,7 @@ where $\phi_0=13.1\times10^{13}$ [1/cm$^2$/s], $R=50$ [cm], $\Sigma_a=0.108$ [1/
 \end{itemize}
 \item [(c)] ({\bf 5 points}) (True/False) The non-leakage probability, $P_{nl}$, is only a function of geometry.
 \begin{itemize}
-    \item \textbf{False.} The probability of leakage also depends on the energy distribution itself, and since the probability of what neutrons at what energies leak then goes back to affect multiplication, there's a cyclic dependency such that you can't \emph{practically} separate these factors, only conceptually. 
+    \item \textbf{False.} The probability of leakage also depends on material properties like cross sections and density. It also depends on the energy distribution itself, and since the probability of what neutrons at what energies leak then goes back to affect multiplication, there's a cyclic dependency such that you can't \emph{practically} separate these factors, only conceptually. 
 \end{itemize}
 \item [(d)] ({\bf 5 points}) (True/False) Consider a sphere of UO$_2$ initially surrounded by vacuum. You enclose the sphere in a layer of \ce{^{157}Gd}, a strong neutron absorber. $k$ should increase.
 \begin{itemize}
@@ -134,7 +250,7 @@ where $\phi_0=13.1\times10^{13}$ [1/cm$^2$/s], $R=50$ [cm], $\Sigma_a=0.108$ [1/
 \end{itemize}
 \item [(b)] ({\bf 5 points}) What kind of nuclear system do you think this spectrum corresponds to? Explain your answer.
 \begin{itemize}
-    \item I believe this spectrum corresponds to a fast spectrum reactor. There is only one mode centered at extremely high energy, around 100keV, and the flux at low energies is so low that it drops off and is unrecorded.
+    \item I believe this spectrum corresponds to a fusion reactor. There is only one mode centered at extremely high energy, ending at a super high peak that looks like 14MeV, the characteristic energy of neutrons from a certain fusion reaction.
 \end{itemize}
 \end{enumerate}
 
@@ -182,7 +298,7 @@ $\rightarrow3.425\% $
 >>> it.center_integral(it.watt, 0, 0.001, 1000)
 1.4498868445903682e-05
 \end{verbatim}
-$\rightarrow0.01450\% $
+$\rightarrow0.001450\% $
 \item[(c)] ({\bf 4 points}) Using numeric integration, find the probability that a prompt fission neutron is born with an energy higher than 3 MeV.
 \\Using the aforementioned upper bound of 18MeV:
 \begin{verbatim}
