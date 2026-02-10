@@ -97,7 +97,17 @@ All of these assumptions are not very severe; they don't change very much from t
 
 \begin{enumerate}
 \item [(a)] ({\bf 5 points}) What is the angular current $\vec{j}$?
+\item[] \ans{Since all neutrons are moving in the same direction $1\hat{x}$, the angular current is $\vec{j}=nv\hat{x}$}
 \item [(b)] ({\bf 5 points}) What is the net rate at which neutrons pass through a surface of area $A$ cm$^2$ inclined at an angle $\varphi$ relative to the $x$-axis? This surface is shown as the diagonal black line above.
+\item[] \ans{The net rate crossing the surface at any point with normal $\hat{n}$ (let us assume outward facing means upwards and to the left, so that current looks like it will enter the surface) as $\vec{j}\cdot\hat{n}$. If we assume the surface is flatly angled at $\varphi$, and since our current is constant, that will evaluate for all points on the surface to:
+\begin{align*}
+    \vec{j}\cdot\hat{n}&=nv\hat{x}\cdot\hat{n} \\
+    &= nv \times \hat{n}_x \\
+    &= nv\sin(\varphi)
+\end{align*}
+Since we assume constant density and speed in the beam over any given point on the surface, we can integrate over the surface by simply multiplying by area to obtain a rate of $Anv\sin(\varphi)$.
+The area $A$, the velocity $v$, and the volumetric term of the number density $n$ cancel out to produce a rate. (Differentially to a specific energy and solid angle, though I suppose it should be clear \emph{which} angle is relevant here.)
+}
 \end{enumerate}
 
 \clearpage
