@@ -98,12 +98,14 @@ All of these assumptions are not very severe; they don't change very much from t
 
 \begin{enumerate}
 \item [(a)] ({\bf 5 points}) What is the angular current $\vec{j}$?
-\item[] \ans{Since all neutrons are moving in the same direction $1\hat{x}$, the angular current is $\vec{j}=nv\hat{x}$}
+\item[] \ans{Since all neutrons are moving in the same direction $1\hat{x}$, the angular current is $\vec{j}(\hat{\Omega}{\color{gray},\vec{r},E,t})=nv\delta(\hat{\Omega}-\hat{x})\hat{\Omega}$, where $\delta(\hat{\Omega}-\hat{x})$ is a Dirac delta function centered on the angle equivalent to the vector $\hat{x}$.}
 \item [(b)] ({\bf 5 points}) What is the net rate at which neutrons pass through a surface of area $A$ cm$^2$ inclined at an angle $\varphi$ relative to the $x$-axis? This surface is shown as the diagonal black line above.
-\item[] \ans{The net rate crossing the surface at any point with normal $\hat{n}$ (let us assume outward facing means upwards and to the left, so that current looks like it will enter the surface) as $\vec{j}\cdot\hat{n}$. If we assume the surface is flatly angled at $\varphi$, and since our current is constant, that will evaluate for all points on the surface to:
+\item[] \ans{The net rate crossing the surface at any point with normal $\hat{n}$ (let us assume outward facing means upwards and to the left, so that current looks like it will enter the surface) is $-\vec{J}\cdot\hat{n}$. If we assume the surface is flatly angled at $\varphi$, and since our current is constant, that will evaluate for all points on the surface to:
 \begin{align*}
-    \vec{j}\cdot\hat{n}&=nv\hat{x}\cdot\hat{n} \\
-    &= nv \times \hat{n}_x \\
+    -\vec{J}\cdot\hat{n} &= -\int_{4\pi}d\hat{\Omega}\vec{j}(\hat{\Omega}{\color{gray},\vec{r},E,t}) \\
+    &= -\int_{4\pi}d\hat{\Omega}nv\delta(\hat{\Omega}-\hat{x})\hat{\Omega}\\
+    &=-nv\hat{x}\cdot\hat{n} \\
+    &= -nv \times \hat{n}_x \\
     &= nv\sin(\varphi)
 \end{align*}
 Since we assume constant density and speed in the beam over any given point on the surface, we can integrate over the surface by simply multiplying by area to obtain a rate of $Anv\sin(\varphi)$.
@@ -238,6 +240,20 @@ where $\phi_0=13.1\times10^{13}$ [1/cm$^2$/s], $R=50$ [cm], $\Sigma_a=0.108$ [1/
 
 \begin{enumerate}
 \item[(a)] ({\bf 5 points}) Obtain the expression for the scalar current $\vec{J}$ at a point on the surface of the sphere, assuming diffusion theory applies.
+\item[] \ans{
+    Assuming diffusion theory applies:
+    \begin{equation*}
+        \vec{J}=D\grad{\phi}
+    \end{equation*}
+    Applying the gradient in spherical coordinates (but 1D, only considering r):
+    \begin{align*}
+        \vec{J} &= D\left(\frac{\partial\phi}{\partial r}\hat{r}\right) \\
+        \color{gray}\rightarrow&\color{gray}\left[\frac{f(x)}{g(x)}\right]'=\frac{f'g-fg'}{g^2},f(r)=\phi_0R\sin{\left(\frac{\pi r}{R}\right)}, g(r)=r \\
+        &\color{gray}f'(r) = \phi_0\pi\cos{\left(\frac{\pi r}{R}\right)},g(r)=1\\
+        \vec{J}&= D\left(\frac{\phi_0\pi\cos{\left(\frac{\pi r}{R}\right)}r - \phi_0R\sin{\left(\frac{\pi r}{R}\right)}}{r^2}\right)\hat{r} \\
+        \vec{J}&= \frac{D\phi_0}{r^2}\left(\pi\cos{\left(\frac{\pi r}{R}\right)}r - R\sin{\left(\frac{\pi r}{R}\right)}\right)\hat{r} \\
+    \end{align*}
+}
 \item[(b)] ({\bf 5 points}) Plot (with a computer) $\vec{J}\cdot\hat{r}$ from $0\leq r\leq R$. Label your axes. Explain the behavior you see at $r=0$.
 \item[(c)] ({\bf 5 points}) What is the rate (1/s) of neutrons which leak from the surface of the sphere?
 \item[(d)] ({\bf 5 points}) What is the net number of neutrons crossing the spherical surface at $r=R/2$ per second?
