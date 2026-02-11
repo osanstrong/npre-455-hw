@@ -115,7 +115,29 @@ The area $A$, the velocity $v$, and the volumetric term of the number density $n
 
 \begin{itemize}
 \item[(a)] ({\bf 4 points}) What is the total current, $\vec{J}(r)$, at a distance $r$ from the source?
+\item[] \ans{Since the source is in an infinite vacuum, we can assume that the neutrons never change direction always facing away from the source (thus treating angular current as a delta function w.r.t. angle), 
+\begin{eqnarray}
+    \vec{J}(r)=\int\vec{j}(r)d\hat{\Omega}=J\hat{n}
+\end{eqnarray}
+We also only consider neutrons emitted by the source, such that for a control surface sphere around the point at given radius $r$:
+\begin{equation}
+    S=\int \vec{J}(r)\cdot\hat{n} dA
+\end{equation}
+Since we assume the source emits neutrons anisotropically:
+\begin{eqnarray}
+    S=AJ(r)\\
+    J(r)=\frac{S}{A}=\frac{S}{4\pi r^2}\\
+    \boxed{\vec{J}(r)=\frac{S}{4\pi r^2}\hat{n}}
+\end{eqnarray}
+where $\hat{n}$ is the normal vector facing away from the source.
+}
 \item[(b)] ({\bf 4 points}) What is the total flux, $\phi(r)$, at a distance $r$ from the source?
+\item[] \ans{
+    In this specific case, the \emph{only} neutrons moving around are the ones moving perfectly isotropically outwards, so the flux has the same magnitude as the total current:
+    \begin{equation}
+        \phi(r)=J(r)=\boxed{\frac{S}{4\pi r^2}}
+    \end{equation}
+}
 \end{itemize}
 
 \clearpage
