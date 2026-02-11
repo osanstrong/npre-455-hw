@@ -253,6 +253,29 @@ where $\phi_0=13.1\times10^{13}$ [1/cm$^2$/s], $R=50$ [cm], $\Sigma_a=0.108$ [1/
 
 \begin{itemize}
 \item[(a)] ({\bf 5 points}) Evaluate the above integral.
+\item[] \ans{
+\begin{equation*}
+\begin{gathered}
+    \int_{4\pi}d\hat{\Omega}f(\theta,\varphi) \\
+    \int_{0}^{2\pi}\int_{0}^{\pi}f(\theta,\varphi)\sin{(\theta)}d\theta d\varphi \\
+    \int_{0}^{2\pi}\int_{0}^{\pi}\theta\varphi^2\sin{(\theta)}d\theta d\varphi \\
+    \int_{0}^{2\pi}\varphi^2\int_{0}^{\pi}\theta\sin{(\theta)}d\theta d\varphi \\
+    \color{gray}\mathrm{Integrate\ by\ parts,\ where\ }uv=-\theta\cos(\theta) \\
+    \int_{0}^{2\pi}\varphi^2
+    \left(\left.\left[-\theta\cos(\theta)\right]\right|_0^\pi - 
+    \int_{0}^{\pi}-\cos{(\theta)}d\theta\right)
+    d\varphi\\
+    \int_{0}^{2\pi}\varphi^2
+    \left(\pi + 0 + \left.[\sin(\theta)]\right|_0^\pi\right)
+    d\varphi\\
+    \int_{0}^{2\pi}\varphi^2\pi d\varphi\\
+    \pi\int_{0}^{2\pi}\varphi^2 d\varphi\\
+    \pi\left.\left[\frac{1}{3}\varphi^3\right]\right|_0^{2\pi}\\
+    \pi\frac{8\pi^3}{3}\\
+    \boxed{\frac{8\pi^4}{3}}
+\end{gathered}
+\end{equation*}
+}
 \end{itemize}
 
 \end{document}
