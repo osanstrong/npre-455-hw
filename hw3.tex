@@ -247,17 +247,89 @@ where $\phi_0=13.1\times10^{13}$ [1/cm$^2$/s], $R=50$ [cm], $\Sigma_a=0.108$ [1/
     \end{equation*}
     Applying the gradient in spherical coordinates (but 1D, only considering r):
     \begin{align*}
-        \vec{J} &= D\left(\frac{\partial\phi}{\partial r}\hat{r}\right) \\
+        \vec{J} &= -D\left(\frac{\partial\phi}{\partial r}\hat{r}\right) \\
         \color{gray}\rightarrow&\color{gray}\left[\frac{f(x)}{g(x)}\right]'=\frac{f'g-fg'}{g^2},f(r)=\phi_0R\sin{\left(\frac{\pi r}{R}\right)}, g(r)=r \\
-        &\color{gray}f'(r) = \phi_0\pi\cos{\left(\frac{\pi r}{R}\right)},g(r)=1\\
-        \vec{J}&= D\left(\frac{\phi_0\pi\cos{\left(\frac{\pi r}{R}\right)}r - \phi_0R\sin{\left(\frac{\pi r}{R}\right)}}{r^2}\right)\hat{r} \\
-        \vec{J}&= \frac{D\phi_0}{r^2}\left(\pi\cos{\left(\frac{\pi r}{R}\right)}r - R\sin{\left(\frac{\pi r}{R}\right)}\right)\hat{r} \\
+        &\color{gray}f'(r) = \phi_0\pi\cos{\left(\frac{\pi r}{R}\right)},g'(r)=1\\
+        \vec{J}&= -D\left(\frac{\phi_0\pi\cos{\left(\frac{\pi r}{R}\right)}r - \phi_0R\sin{\left(\frac{\pi r}{R}\right)}}{r^2}\right)\hat{r} \\
+        \vec{J}&=\boxed{ -\frac{D\phi_0}{r^2}\left(\pi\cos{\left(\frac{\pi r}{R}\right)}r - R\sin{\left(\frac{\pi r}{R}\right)}\right)\hat{r}} \\
     \end{align*}
 }
 \item[(b)] ({\bf 5 points}) Plot (with a computer) $\vec{J}\cdot\hat{r}$ from $0\leq r\leq R$. Label your axes. Explain the behavior you see at $r=0$.
+\item[] \ans{
+    See Figure~\ref{fig:curr-plot}. At $r=0$, while the value is technically not directly defined, it approaches 0. This makes sense, because if the problem is rotationally symmetric, there couldn't be any net neutron movement at exactly $r=0$ for any angle $\hat{\Omega}$, since that would make $\vec{J}\cdot\hat{r}$ the reverse value on the opposite angle $-\hat{\Omega}$
+}
+\item[] \ans{\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{figures/hw3_JPlot.png}
+    \caption{\ans{The radial current $\vec{J}\cdot\hat{r}$ from $r=0$ to $r=50\mathrm{cm}$. Note that while behavior of the function is technically undefined at $r=0$, it approaches 0.}}
+    \label{fig:curr-plot}
+\end{figure}}
 \item[(c)] ({\bf 5 points}) What is the rate (1/s) of neutrons which leak from the surface of the sphere?
+\item[] \ans{
+\item[] The rate of neutrons leaving the sphere may be found by integrating the dot product of the neutron current and the surface normal over the surface. \\
+
+    If we assume $\vec{J}(r)$ is still constant w.r.t angular coordinates, then the integral of this current crossing the surface evaluates:
+    \begin{gather*}
+        \int_{S}\vec{J}\cdot\hat{r}dA_{r=R} \\
+        4\pi R^2 J_r \\
+        -4R^2\pi \left[\frac{D\phi_0}{R^2}\left(\pi\cos{\left(\frac{\pi R}{R}\right)}R - R\sin{\left(\frac{\pi R}{R}\right)}\right)\right]\\
+        -4R\pi \left[D\phi_0\left(\pi\cos{\left(\pi\right)} - \sin{\left(\pi\right)}\right)\right]\\
+        -4R\pi \left[D\phi_0\left(\pi(-1)\right)\right]\\
+        \boxed{4R\pi^2 D\phi_0}\\
+        4\times50\mathrm{cm}\times\pi^2\times1.1\mathrm{cm}\times13.1\cdot10^{13}\mathrm{cm^{-2}s^{-1}} \\
+        \boxed{2.844\times10^{17}/\mathrm{s}}
+    \end{gather*}
+
+    Where this corresponds to neutrons crossing in the outwards facing, positive-$r$ direction.
+}
 \item[(d)] ({\bf 5 points}) What is the net number of neutrons crossing the spherical surface at $r=R/2$ per second?
+\item[] \ans{
+    We can imagine the arbitrary surface at $r=R/2$, and the net rate at which neutrons cross that surface can still be found by integrating the product of the current there and the normal vector:
+    \begin{gather*}
+        \int_{S}\vec{J}\cdot\hat{r}dA_{r=R/2} \\
+        4\pi \frac{R^2}{4} J_r \\
+        \pi R^2 \left[-\frac{4D\phi_0}{R^2}\left(\pi\cos{\left(\frac{\pi R}{2R}\right)}R/2 - R\sin{\left(\frac{\pi R}{2R}\right)}\right)\right]\\
+        \pi R \left[-4D\phi_0\left(\pi\cos{\left(\frac{\pi}{2}\right)}/2 - \sin{\left(\frac{\pi}{2}\right)}\right)\right]\\
+        \pi R \left[-4D\phi_0\left(0-1\right)\right]\\ 
+        \boxed{4R\pi D\phi_0}\\ 
+        4\times50\mathrm{cm}\times\pi\times1.1\mathrm{cm}\times13.1\cdot10^{13}\mathrm{cm^{-2}s^{-1}} \\
+        \boxed{9.054\cdot10^{16}/\mathrm{s}}
+    \end{gather*}
+
+    Where this corresponds to neutrons crossing in the outwards facing, positive-$r$ direction. It makes sense that this is less than the neutrons crossing at the outside, even though the current is greater: it's greater for points on this surface which is a fraction of the surface area of the outermost surface.
+}
 \item[(e)] ({\bf 10 points}) Consider a thin spherical shell between $R/2-0.5\text{cm}<r<R/2+0.5\text{cm}$. Estimate the rate of neutrons being (i) absorbed in this shell, (ii) generated in this shell, and (iii) entering or leaving the shell through the surfaces. Carry out a neutron balance using these numbers. Be clear about your assumptions; if there is any ``discrepancy'' between sources and losses, explain why it exists and what to change about your calculation to make the discrepancy smaller.
+\item[] \ans{
+    Let us assume that the sphere is thin enough that flux is constant across any point $\vec{r}\in R/2-0.5\text{cm}<r<R/2+0.5\text{cm}$. \\
+    We can then model neutron absorption and generation, volume-integrated functions of flux, as simply the shell volume times a uniform rate:
+    \begin{align*}
+        (i) &= \Sigma_a \phi(r=R/2) V_{shell}\\
+        &\color{gray}\phi(r=R/2) = \frac{2\phi_0R\sin{\left(\frac{\pi}{2}\right)}}{R}=2\phi_0=26.2\times10^{13}\mathrm{cm^{-2}s^{-1}}\\
+        &\color{gray}V_{shell}=\frac{4\pi}{3}(r_o^3-r_i^3)=\frac{4\pi}{3}(25.5^3-24.5^3)\mathrm{cm^3}=7855.03\mathrm{cm^3}\\
+        &\color{gray}\Sigma_a=0.108\mathrm{cm^{-1}}\\
+        (i) &= 0.108\mathrm{cm^{-1}}\times 26.2\times10^{13}\mathrm{cm^{-2}s^{-1}} \times 7855.03\mathrm{cm^3}=\boxed{2.22\times10^{17}/\mathrm{s}}\\
+        (ii) &= \nu\Sigma_f\phi(r=R/2)V_{shell}\\&=2.4\times0.0727/\mathrm{cm}\times26.2\times10^{13}\mathrm{cm^{-2}s^{-1}} \times 7855.03\mathrm{cm^3}=\boxed{3.59\times10^{17}/\mathrm{s}}\\
+    \end{align*}
+
+    To find the number of neutrons entering and leaving, the \texttt{python} script \texttt{plot\_p8.py} is shown in Appendix~\ref{sec:p8e-script}, and used to evaluate the previously found crossing formula for the two specific $r$ values more concisely:
+    
+    \begin{align*}
+        C(r)&=4\pi r^2\times \vec{J}\cdot\hat{r} \\
+            &=\mathtt{4**r*get\_Jr(r)}\\
+        (iii)C_{in}&=C(R/2-0.5)=\mathtt{8.611809974870085e+16}=\boxed{0.8612\times10^{17}/s} \\
+        C_{out}&=C(R/2+0.5)=\mathtt{9.505263884593955e+16}=\boxed{0.9505\times10^{17}/s} \\
+    \end{align*}
+    This yields a neutron balance 
+    \begin{gather*}
+        \mathrm{gen.-abs.+in-out} \\
+        \left[3.59 - 2.22 + 0.86 - 0.95\right]\times10^{17}/\mathrm{s}\\
+        1.28\times10^{17}/\mathrm{s}\\
+    \end{gather*}
+    Which is not zero. 
+    Given that neutron production and absorption are proportional to the same flux at a point under these uniform properties, undoing the thin volume assumption and integrating over the actual non-uniform function of flux for each point might help, but I'm not sure that it would have this big of an effect.
+    Another possible cause, which I would have been able to address with more time, would have been if my formulation of current was somehow missing a factor. (I have spent a couple hours redoing things and testing it in Desmos (https://www.desmos.com/calculator/kdmohf9x1f), and been unable to find a key issue.)
+    If, for example, the ratio of current to flux were about $15.32$ times as large, this balance would cancel much closer to zero.
+}
 \end{enumerate}
 
 \clearpage
@@ -294,5 +366,50 @@ where $\phi_0=13.1\times10^{13}$ [1/cm$^2$/s], $R=50$ [cm], $\Sigma_a=0.108$ [1/
 }
 \end{itemize}
 
+\appendix
+\section{Python Utility Script for Problem 8}\label{sec:p8e-script}
+\ans{
+The contents of the \texttt{python} script \texttt{plot\_p8.py} may be found:}
+\begin{verbatim}
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Material constants
+D = 1.1 # cm
+PHI_0 = 13.1e13 # /cm2s
+PI = 3.141592653589
+R = 50 # cm
+
+# Current formula
+def get_Jr(r):
+    return -(D * PHI_0 / (r*r)) * (PI*r*np.cos(PI * r / R) - R*np.sin(PI*r/R))
+
+# Crossing surface at r
+def get_crossings(r):
+    return 4*PI*r*r * get_Jr(r)
+
+# 8e: Evaluate at specific values of r
+Jr_i = get_Jr(R/2 - 0.5)
+Jr_o = get_Jr(R/2 + 0.5)
+print(get_crossings(R/2 - 0.5))
+print(get_crossings(R/2 + 0.5))
+
+
+# Array
+r = np.linspace(1, R, 1000)
+
+Jr = get_Jr(r)
+
+# Plots
+plt.plot(r, Jr, label="Jr")
+
+plt.xlabel("r (cm)")
+plt.ylabel("Current Jr (/cm2s)")
+
+plt.legend()
+plt.show()
+
+
+\end{verbatim}
 \end{document}
 
