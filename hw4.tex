@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+\usepackage[hidelinks]{hyperref}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage[acronym,nomain,nonumberlist,nogroupskip,nopostdot]{glossaries} % for glossary of acronyms
+\usepackage{siunitx}
+\usepackage{verbatim}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{threeparttable}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{cancel}
+\usepackage{mathrsfs}
+\usepackage{mhchem}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+\usepackage{xcolor}
+\usepackage{amsmath,mathtools}
+\newcommand{\hO}{\hat{\Omega}}
+\newcommand\todo[1]{{\color{red}\bf [TODO: #1]}}
+\usepackage{tcolorbox}
+\setacronymstyle{long-short}
+
+\newcommand{\mdash}{\discretionary{}{}{\kern 0.1em}---\discretionary{}{}{\kern 0.1em}}
+\newcommand\Tstrut{\rule{0pt}{2.6ex}}         % = `top' strut
+\newcommand\Bstrut{\rule[-0.9ex]{0pt}{0pt}}   % = `bottom' strut
+\newcommand{\beq}{\begin{equation}\begin{aligned}}
+\newcommand{\eeq}{\end{aligned}\end{equation}}
+\newcommand{\beqs}{\begin{equation*}\begin{aligned}}
+\newcommand{\eeqs}{\end{aligned}\end{equation*}}
+\newcommand{\ans}[1]{{\color{violet}#1}}
+
+\setlength{\parskip}{5pt}
+
+\begin{document}
+\noindent {\bf \Large NPRE 455: Homework 4}\\
+
+\begin{tcolorbox}
+On this homework, you will perform your first solutions of the neutron diffusion equation. For the remainder of the course, unless you are explicitly told what vacuum boundary condition to use, the choice is yours (extrapolated vs. Robin).
+\end{tcolorbox}
+\vspace{2cm}
+
+\noindent 1. ({\bf factual concept recall}) Provide a {\it short} (1-2 sentences) answer to each of the following questions.
+
+\begin{itemize}
+\item[(a)] ({\bf 2 points}) The total interaction term in the neutron transport equation is $\Sigma_t(\vec{r},E,t,\hO)\psi(\vec{r},E,t,\hO)$. Why is the total interaction term given by $\Sigma_a(\vec{r},t)\phi(\vec{r},t)$ in the one-speed diffusion equation? (In other words, why use $\Sigma_a$ instead of $\Sigma_t$)?
+\item[] \ans{The total section comprises both absorption and scattering, but scattering doesn't remove a neutron from the system, only changing its energy.
+If all neutrons are simplified to one energy group, then scattering doesn't remove any of them and is essentially ignorable w.r.t total interaction.}
+\item[(b)] ({\bf 1 point}) When can the $-\nabla\cdot (D\nabla\phi)$ term be written as $-D\nabla^2\phi$?
+\item[] \ans{If the diffusion constant $D$ does not change with respect to position, such as in a uniform material, then it can be separated and applied to the left of the $\nabla$ operator this way.}
+\item[(c)] ({\bf 2 points}) What is the difference between a distributed and localized source? Give an example of each.
+\item[] \ans{In a distributed source, like spontaneous fission of ${252}$Cf distributed in the fuel or lithium/beryllium struck by alpha particles (not neutrons so it's not flux-based), the source is considered volumetrically at every point, and shows up in the balance equation. In a localized source, like an idealized painted coating of $^{252}$Cf on a sphere, the volume doesn't have to be considered in a new diffusion equation and can instead be treated as a modified boundary condition.}
+\item[(d)] ({\bf 2 points}) Explain the extrapolated vacuum boundary condition. Does it mean that the flux decreases linearly in the vacuum region?
+\item[] \ans{In the extrapolated flux vacuum boundary condition, we linearly extrapolate the flux and its gradient to some distance $d=2.1312D$ away where it will reach 0. This does \emph{not} mean that the flux actually decreases linearly until that point, rather just that this provides a good approximate constraint to apply.}
+\item[(e)] ({\bf 2 points}) Give a physical interpretation for $L$, the neutron diffusion length. How is it different from the mean free path, which has the same units as $L$?
+\item[] \ans{Physically, $L$ corresponds to half of the straight-line distance between source to absorption, averaging over when it scatters and changes direction, whereas the mean free path is the distance between \emph{any} interaction, including scattering.}
+\item[(f)] ({\bf 1 point}) What is a typical value of $L$ in a Pressurized Water Reactor (PWR) and Sodium Fast Reactor (SFR)?
+\item[] \ans{A typical PWR might have an $L$ of 5.91~cm, whereas an SFR would typically have a much higher $L$ around 23.61~cm.}
+\end{itemize}
+
+\clearpage
+\noindent 2. ({\bf diffusion balance equation}) Consider a spherical shell between $r$ and $r+dr$. Neutrons enter and leave the shell by streaming, and are produced and lost within the shell due to fission and absorption, respectively.
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.3\linewidth]{figures/hw4Q_spherical_shell.png}
+\end{figure}
+
+\begin{enumerate}
+\item[(a)] ({\bf 10 points}) Derive the one-group, steady-state, 1-D ($r$-only) neutron balance equation in spherical geometry. Follow the approach used in class to derive the balance equation for the Cartesian cases. ({\it Hint}: Unlike the Cartesian case, the area for the neutron current calculation on the two surfaces will be different).
+\end{enumerate}
+
+
+
+\clearpage
+\noindent 3. ({\bf diffusion boundary conditions}) Write down (but do not solve!) the boundary conditions for the following multi-region, 1-D problems. If there are any vacuum boundaries, give two options for the boundary condition -- the extrapolated condition as well as the Robin condition.
+
+\begin{enumerate}
+\item[(a)] ({\bf 6 points}) See Fig. \ref{fig:3a}. Region 2 has a distributed source of strength $S$ [neutrons/cm$^3$/s].
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.6\linewidth]{figures/hw4Q_3dr.png}
+\caption{Cartesian domain}
+\label{fig:3a}
+\end{figure}
+
+\item[(b)] ({\bf 4 points}) See Fig. \ref{fig:3b}. Material 2 continues to $\pm\infty$ on both sides.
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/hw4Q_2dregion.png}
+\caption{Cartesian domain}
+\label{fig:3b}
+\end{figure}
+
+\item[(c)] ({\bf 4 points}) See Fig. \ref{fig:3c}. The red curve indicates a source of neutrons of strength $S$ [neutrons/cm$^2$/s] coated on the interface.
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.3\linewidth]{figures/hw4Q_sphere_r.png}
+\caption{Spherical domain}
+\label{fig:3c}
+\end{figure}
+
+
+\end{enumerate}
+
+
+
+\clearpage
+\noindent 4. ({\bf non-multiplying flux solution}) A point source emitting $S$ neutrons/s is placed at the center of a non-multiplying sphere with radius $R$.
+% add question about value of current being so small - does it make sense depending on L?
+
+\begin{enumerate}
+\item[(a)] ({\bf 8 points}) Show that the flux in the sphere is given by the following. Use an extrapolated vacuum boundary condition. ({\it Hint}: to obtain the given solution form, recall the identity: $A\sinh{bx}+B\cosh{bx}=C\sinh{\left\lbrack b(a-x)\right\rbrack}$).
+
+\beq
+\label{eq:phi1}
+\phi(r)=\frac{S}{4\pi D\sinh{\frac{\tilde{R}}{L}}}\frac{\sinh{\frac{\tilde{R}-r}{L}}}{r}
+\eeq
+
+\end{enumerate}
+
+\begin{enumerate}
+\item[(b)] ({\bf 5 points}) What is the rate [1/s] at which neutrons leak from the sphere?
+\item[(c)] ({\bf 5 points}) What is the probability that a neutron emitted by the source escapes from the surface of the sphere?
+\item[(d)] ({\bf 5 points}) Using $S=10^{10}$ [neutrons/s], $D=0.9$ [cm], $\Sigma_a=0.5$ [1/cm], and $R=100$ [cm], determine if this system is at steady state. 
+\item[(e)] ({\bf 10 points}) Now, re-solve this problem using the Robin-type vacuum boundary condition instead of the extrapolated vacuum boundary condition. Find the flux solution.
+\item[(f)] ({\bf 4 points}) Plot Eq. \eqref{eq:phi1} and your answer from part (e) as a function of $r$ for $0.01R\leq r\leq R$ using $R=1.5$ [cm], $S=100$ [neutrons/s], $\Sigma_a=0.026$ [1/cm], and $D=0.79$ [cm]. Qualitatively explain the two flux solutions -- does the extrapolated boundary condition do a good job of approximating the Robin boundary condition?
+\end{enumerate}
+
+\begin{tcolorbox}
+When asked to plot flux solutions in your homework, I will ask you to qualitatively explain them. When doing so, please describe (i) why the flux has the behavior it does at boundaries/interfaces (can you ``see'' the boundary conditions you used to solve the problem manifesting now in the plots?); (ii) why the flux is high/low in certain parts of the domain; and (iii) any other features you see pertinent to note.
+\end{tcolorbox}
+
+
+\clearpage
+\noindent 5. ({\bf non-multiplying flux solution}) An infinite planar source emitting $S$ [neutrons/cm$^2$/s] is placed between two finite slabs. The left slab is beryllium (of thickness $a$) and the right slab is graphite (of thickness $b$). Outside these materials is a material with very low $\Sigma_t$ that you can approximate as vacuum.
+
+\begin{figure}[htb!]
+\centering
+\includegraphics[width=0.4\linewidth]{figures/hw4Q_planes.png}
+\end{figure}
+
+\begin{enumerate}
+\item[(a)] ({\bf 10 points}) Derive an expression for the neutron flux in the system.
+\item[(b)] ({\bf 4 points}) Plot the flux for $D_1=0.1$ [cm], $D_2=0.8$ [cm], $L_1=1.0$ [cm], $L_2=7.0$ [cm], $a=20$ [cm], $b=30$ [cm], and $S=10^{10}$ [neutrons/s]. Region 1 is the beryllium, and region 2 is the graphite. Qualitatively describe the behavior.
+\end{enumerate}
+
+
+\clearpage
+\noindent 6. ({\bf deep concept understanding}) For each of the following statements, indicate whether the statement is true or false. Provide an explanation.
+
+\begin{enumerate}
+\item[(a)] ({\bf 5 points}) (True/False) At a material interface between regions of different $\Sigma$, only some of the components of $\vec{J}$ are continuous across the interface.
+\item[(b)] ({\bf 5 points}) (True/False) At a material interface, the gradient in flux must be continuous.
+\item[(c)] ({\bf 5 points}) (True/False) When we write the diffusion equation as shown below, this means that neutrons only travel in the $\pm x$ directions.
+
+\beq
+-D\frac{d^2\phi}{dx^2}+\Sigma_a\phi=S
+\eeq
+\end{enumerate}
+
+
+\end{document}
+
