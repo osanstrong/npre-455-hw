@@ -186,7 +186,28 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
 \label{fig:3b}
 \end{figure}
 
-\item[] {}
+\item[] \ans{
+    Let us consider the system symmetric around the plane $x=0$.
+    We can now consider one set of solutions for $0\leq x<\infty$.
+    This yields two solution regions, requiring four boundary conditions.\\
+
+    At $x=0$, we apply a symmetry condition with no localized source on the plane:
+    \begin{align*}
+        J_+(0_-)&=J_+(0_+)\\
+        \frac{\phi_1(x=0_-)}{4}-\frac{1}{2}D_1\frac{d\phi_1}{dx}(x=0_-)&=\frac{\phi_1(x=0_+)}{4}+\frac{1}{2}D_1\frac{d\phi_1}{dx}(x=0_+)\\
+        \frac{d\phi_1}{dx}(x=0)&=0
+    \end{align*}
+
+    For the boundary between materials 1 and 2, let us again consider continuity of flux and the continuity of current crossing the boundary:
+    \begin{align*}
+        \phi_1(x=\frac{a}{2})&=\phi_2(x=\frac{a}{2})\\
+        -D_1\frac{d\phi_1}{dx}(x=\frac{a}{2})&=-D_2\frac{d\phi_2}{dx}(x=\frac{a}{2})
+    \end{align*}
+    And finally let us constrain that as $x\rightarrow\infty$, the flux is either 0 or finite:
+    \begin{equation*}
+        \phi_2(x\rightarrow\infty)=0\mathrm{~or~finite}
+    \end{equation*}
+}
 
 \item[(c)] ({\bf 4 points}) See Fig. \ref{fig:3c}. The red curve indicates a source of neutrons of strength $S$ [neutrons/cm$^2$/s] coated on the interface.
 
@@ -197,6 +218,29 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
 \label{fig:3c}
 \end{figure}
 
+\item[] \ans{
+    Once again we have two regions, requiring four boundary conditions.\\
+    Given radial symmetry around the origin, and the lack of a point source, the symmetry condition at $r=0$ simplifies to requiring no net current at the origin:
+    \begin{equation}
+        -D_1\frac{d\phi_1}{dr}(0)=0
+    \end{equation}
+    At the boundary between regions 1 and 2, even with the localized source, we still require continuity of flux:
+    \begin{equation}
+        \phi_1(r=R_1)=\phi_2(r=R_1)
+    \end{equation}
+    and a jump condition (conservation of current crossing boundaries, including the neutrons generated at the boundary):
+    \begin{equation}
+        \lim_{r\rightarrow R_1}\left[-D_2\frac{d\phi_2(r)}{dr}+D_1\frac{d\phi_1(r)}{dr}\right]=S
+    \end{equation}
+    Finally, at the vacuum, we may either consider an extrapolated boundary a distance $2.1312D$ away:
+    \begin{equation*}
+        \phi_2(r=R_2+2.1312D)=0
+    \end{equation*}
+    or the more explicit condition of no incoming current at $R_2$:
+    \begin{equation}
+        J_{-,2}=\frac{\phi_2(R_2)}{4}+\frac{D}{2}\frac{d\phi_2(R_2)}{dr}=0
+    \end{equation}
+}
 
 \end{enumerate}
 
