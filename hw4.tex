@@ -34,7 +34,7 @@
 \newcommand{\ans}[1]{{\color{violet}#1}}
 \newcommand{\volume}{\mathop{\ooalign{\hfil$V$\hfil\cr\kern0.08em--\hfil\cr}}\nolimits} % Cursed workaround for typsetting control volume LOL
 \newcommand{\Nc}{\mathscr{N}}
-\newcommand{\ddt}{\frac{d}{dt}}
+\newcommand{\ddt}{\frac{\partial}{\partial t}}
 
 \setlength{\parskip}{5pt}
 
@@ -81,16 +81,22 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
         \mathrm{sources=fission~rate+current~entering+delayed+external}\\
         \mathrm{losses=absorption~rate+current~leaving}
     \end{gather*}
-    The time rate of change of the volume can be formulated by integrating the local time rate of change over every point in the volume:
-    \begin{gather*}
-        \mathrm{time~rate}=\ddt\int d\volume\Nc(\vec{r},t) \\
-        = \int d\volume \ddt\Nc(\vec{r},t)\\
-        = \int_{0}^{\pi}\int_{0}^{2\pi}\int_{r}^{r+dr}\Nc(\vec{r},t)\rho^2\sin(\varphi)d\rho d\theta d\varphi
-    \end{gather*}
-    While this shows evaluation of that volume integral in spherical coordinates, for the moment the integral will be left as $\int d\volume$.\\
+
+    Rather than a differential volume with respect to radius and solid angle $\rho^2\sin(\varphi)d\rho d\theta d\varphi$, we consider this shell, already integrated around solid angle, only differential to radius, $4\pi\rho^2d\rho$.\\
+    Assuming properties and flux are uniform across solid angle, the overall time rate of change, fission rate, delayed and external sources, and absorption rate can all be considered relative to this differential shell:
+    \begin{equation*}
+        \ddt(n)4\pi\rho^2d\rho = \left((\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i\right)4\pi\rho^2d\rho + \mathrm{current~in-current~out}
+    \end{equation*}
+    Given that we consider the whole shell, the only two surfaces we need to consider 
+    % The time rate of change of the volume can be formulated by integrating the local time rate of change over every point in the volume:
+    % \begin{gather*}
+    %     \mathrm{time~rate}=\ddt\int d\volume\Nc(\vec{r},t) \\
+    %     = \int d\volume \ddt\Nc(\vec{r},t)\\
+    %     = \int_{0}^{\pi}\int_{0}^{2\pi}\int_{r}^{r+dr}\Nc(\vec{r},t)\rho^2\sin(\varphi)d\rho d\theta d\varphi
+    % \end{gather*}
+    % While this shows evaluation of that volume integral in spherical coordinates, for the moment the integral will be left as $\int d\volume$.\\
     % Parts of both sources and losses will be proportional to flux: absorption and fission. These will be found by integrating the reaction rate $\Sigma_{i\in\{a,f\}}\phi(\vec{r},t)$ across the control volume.\\
     % For fission:
-    Sources include neutrons entering 
 
 }
 \end{enumerate}
