@@ -55,7 +55,7 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
 \item[(b)] ({\bf 1 point}) When can the $-\nabla\cdot (D\nabla\phi)$ term be written as $-D\nabla^2\phi$?
 \item[] \ans{If the diffusion constant $D$ does not change with respect to position, such as in a uniform material, then it can be separated and applied to the left of the $\nabla$ operator this way.}
 \item[(c)] ({\bf 2 points}) What is the difference between a distributed and localized source? Give an example of each.
-\item[] \ans{In a distributed source, like spontaneous fission of ${252}$Cf distributed in the fuel or lithium/beryllium struck by alpha particles (not neutrons so it's not flux-based), the source is considered volumetrically at every point, and shows up in the balance equation. In a localized source, like an idealized painted coating of $^{252}$Cf on a sphere, the volume doesn't have to be considered in a new diffusion equation and can instead be treated as a modified boundary condition.}
+\item[] \ans{In a distributed source, like spontaneous fission of $^{252}$Cf distributed in the fuel or lithium/beryllium struck by alpha particles (not neutrons so it's not flux-based), the source is considered volumetrically at every point, and shows up in the balance equation. In a localized source, like an idealized painted coating of $^{252}$Cf on a sphere, the volume doesn't have to be considered in a new diffusion equation and can instead be treated as a modified boundary condition.}
 \item[(d)] ({\bf 2 points}) Explain the extrapolated vacuum boundary condition. Does it mean that the flux decreases linearly in the vacuum region?
 \item[] \ans{In the extrapolated flux vacuum boundary condition, we linearly extrapolate the flux and its gradient to some distance $d=2.1312D$ away where it will reach 0. This does \emph{not} mean that the flux actually decreases linearly until that point, rather just that this provides a good approximate constraint to apply.}
 \item[(e)] ({\bf 2 points}) Give a physical interpretation for $L$, the neutron diffusion length. How is it different from the mean free path, which has the same units as $L$?
@@ -146,7 +146,7 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
     For the two material boundaries at $x=a$ and $x=b$, we can assume continuous flux:
     \begin{align}
         \phi_1(x=a)&=\phi_2(x=a) \\
-        \phi_2(X=b)&=\phi_3(x=b)
+        \phi_2(x=b)&=\phi_3(x=b)
     \end{align} 
     where $\phi_i$ represents the flux in region $i$.
     We also know that neutrons are conserved, so we can apply the jump condition without any neutron source:
