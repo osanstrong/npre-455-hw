@@ -109,9 +109,9 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
         \ddt(n)&= (\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i    - \frac{1}{r^2}\frac{d}{dr}\left(-r^2 D \frac{\partial\phi}{\partial r}\right) \\
         \ddt(n)- \frac{1}{r^2}\frac{d}{dr}\left(r^2 D \frac{\partial\phi}{\partial r}\right)&= (\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i \\
     \end{align*}
-    \begin{equation}
+    \begin{equation*}
         \boxed{\frac{1}{v}\frac{\partial\phi}{\partial t}- \frac{1}{r^2}\frac{d}{dr}\left(r^2 D \frac{\partial\phi}{\partial r}\right)= (\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i \\}
-    \end{equation}
+    \end{equation*}
     % The time rate of change of the volume can be formulated by integrating the local time rate of change over every point in the volume:
     % \begin{gather*}
     %     \mathrm{time~rate}=\ddt\int d\volume\Nc(\vec{r},t) \\
@@ -133,12 +133,49 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
 \begin{enumerate}
 \item[(a)] ({\bf 6 points}) See Fig. \ref{fig:3a}. Region 2 has a distributed source of strength $S$ [neutrons/cm$^3$/s].
 
+
 \begin{figure}[htb!]
 \centering
 \includegraphics[width=0.6\linewidth]{figures/hw4Q_3dr.png}
 \caption{Cartesian domain}
 \label{fig:3a}
 \end{figure}
+\item[] \ans{
+    Since we have three regions, each with their own diffusion equation (2 derivatives), we should look for a total of 6 boundary conditions.\\
+
+    For the two material boundaries at $x=a$ and $x=b$, we can assume continuous flux:
+    \begin{align}
+        \phi_1(x=a)&=\phi_2(x=a) \\
+        \phi_2(X=b)&=\phi_3(x=b)
+    \end{align} 
+    where $\phi_i$ represents the flux in region $i$.
+    We also know that neutrons are conserved, so we can apply the jump condition without any neutron source:
+    \begin{align*}
+        \left.\vec{J_1}\cdot\hat{n}\right|_{x=a}&=\left.\vec{J_2}\cdot\hat{n}\right|_{x=a}\\
+        \left.-D_1\frac{d\phi_1}{dx}\right|_{x=a}&=\left.-D_2\frac{d\phi_2}{dx}\right|_{x=a}
+    \end{align*}
+    \begin{align}
+        -D_1\frac{d\phi_1}{dx}(x=a)&=-D_2\frac{d\phi_2}{dx}(x=a)\\
+        -D_2\frac{d\phi_2}{dx}(x=b)&=-D_3\frac{d\phi_3}{dx}(x=b)
+    \end{align}
+
+    Finally, for the fifth and sixth boundary conditions, we can consider the vacuum boundaries at $x=0$ and $x=c$.
+    We could consider the extrapolated condition at a distance $2.1312D$ away:
+    \begin{align*}
+        \phi_1(x=-2.1312D)&=0\\
+        \phi_3(x=c+2.1312D)&=0
+    \end{align*}
+    Alternatively, we could consider the more explicit condition that inward current $J_{-}=\frac{\phi}{4}+\frac{1}{2}D\nabla\phi\cdot\hat{n}$ is zero:
+    \begin{align*}
+        J_{-}=0&=\frac{\phi}{4}+\frac{1}{2}D\nabla\phi\cdot\hat{n}\\
+        &=\frac{\phi}{4}+\frac{1}{2}D\frac{d\phi}{dx}\hat{n}_x(x)
+    \end{align*}
+    Applying to the left edge at $x=0$ where $\hat{n}_x=-1$ and the right edge at $x=c$ where $\hat{n}_x=1$,
+    \begin{align}
+        \frac{\phi_1(x=0)}{4}-\frac{1}{2}D_1\frac{d\phi_1}{dx}(x=0)&=0\\
+        \frac{\phi_3(x=c)}{4}+\frac{1}{2}D_3\frac{d\phi_3}{dx}(x=c)&=0
+    \end{align}
+}
 
 \item[(b)] ({\bf 4 points}) See Fig. \ref{fig:3b}. Material 2 continues to $\pm\infty$ on both sides.
 
@@ -148,6 +185,8 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
 \caption{Cartesian domain}
 \label{fig:3b}
 \end{figure}
+
+\item[] {}
 
 \item[(c)] ({\bf 4 points}) See Fig. \ref{fig:3c}. The red curve indicates a source of neutrons of strength $S$ [neutrons/cm$^2$/s] coated on the interface.
 
