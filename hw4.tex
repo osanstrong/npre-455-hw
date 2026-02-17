@@ -78,7 +78,7 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
     If we consider the given control volume, and neutrons are conserved, then over that control volume the change in neutrons over time should be equivalent to the source rate minus the loss rate:
     \begin{gather*}
         \mathrm{time~rate~of~change=sources-losses}\\
-        \mathrm{sources=fission~rate+current~entering}\\
+        \mathrm{sources=fission~rate+current~entering+delayed+external}\\
         \mathrm{losses=absorption~rate+current~leaving}
     \end{gather*}
     The time rate of change of the volume can be formulated by integrating the local time rate of change over every point in the volume:
@@ -87,8 +87,11 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
         = \int d\volume \ddt\Nc(\vec{r},t)\\
         = \int_{0}^{\pi}\int_{0}^{2\pi}\int_{r}^{r+dr}\Nc(\vec{r},t)\rho^2\sin(\varphi)d\rho d\theta d\varphi
     \end{gather*}
-    Parts of both sources and losses will be proportional to flux: absorption and fission. These will be found by integrating the reaction rate $\Sigma_{i\in\{a,f\}}\phi(\vec{r},t)$ across the control volume.\\
-    For fission
+    While this shows evaluation of that volume integral in spherical coordinates, for the moment the integral will be left as $\int d\volume$.\\
+    % Parts of both sources and losses will be proportional to flux: absorption and fission. These will be found by integrating the reaction rate $\Sigma_{i\in\{a,f\}}\phi(\vec{r},t)$ across the control volume.\\
+    % For fission:
+    Sources include neutrons entering 
+
 }
 \end{enumerate}
 
