@@ -82,12 +82,36 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
         \mathrm{losses=absorption~rate+current~leaving}
     \end{gather*}
 
-    Rather than a differential volume with respect to radius and solid angle $\rho^2\sin(\varphi)d\rho d\theta d\varphi$, we consider this shell, already integrated around solid angle, only differential to radius, $4\pi\rho^2d\rho$.\\
+    Rather than a differential volume with respect to radius and solid angle $ r^2\sin(\varphi)d r d\theta d\varphi$, we consider this shell, already integrated around solid angle, only differential to radius, $4\pi r^2d r$.\\
     Assuming properties and flux are uniform across solid angle, the overall time rate of change, fission rate, delayed and external sources, and absorption rate can all be considered relative to this differential shell:
     \begin{equation*}
-        \ddt(n)4\pi\rho^2d\rho = \left((\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i\right)4\pi\rho^2d\rho + \mathrm{current~in-current~out}
+        \ddt(n)4\pi r^2d r = \left((\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i\right)4\pi r^2d r + \mathrm{current~in-current~out}
     \end{equation*}
-    Given that we consider the whole shell, the only two surfaces we need to consider 
+    Given that we consider the whole shell, the only two surfaces we need to consider are the inner and outer surfaces of the shell.
+    Additionally, let us combine the current entering and the current leaving into simply the net current entering each surface:
+    % \begin{equation}
+    %     \mathrm{net~current}=\vec{J}(r)\cdot\hat{n(r)}4\pi r^2d r+\vec{J}(r+dr)\cdot\hat{n(r+dr)}4\pi (r+dr)^2d r
+    % \end{equation}
+    \begin{align*}
+        \mathrm{net~current}&=J(r)4\pi r^2-J(r+dr)4\pi (r+dr)^2\\
+        &=-4\pi d(r^2J)
+    \end{align*}
+    where $J(r)$ is the current in the outwards $\hat{r}$ direction, since we assume current is negligible in the angular directions. (If the net current were \emph{inwards}, this net equation would still hold, resulting in neutrons instead leaving at $r$ and entering at $r+dr$)\\
+
+    Plugging back into our balance and dividing both sides by $4\pi r^2dr$:
+    \begin{align*}
+        \ddt(n)4\pi r^2d r &= \left((\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i\right)4\pi r^2d r-4\pi d(r^2J) \\
+        \ddt(n)&= (\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i    - \frac{1}{r^2}\frac{d(r^2J)}{dr} \\
+    \end{align*}
+    Finally, applying a diffusive current assumption $\vec{J}=-\nabla\phi$, and that in our angularly symmetric spherical coordinates, the gradient of flux is $\nabla\phi=\frac{\partial\phi}{\partial r}$:
+    \begin{align*}
+        \ddt(n)&= (\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i    - \frac{1}{r^2}\frac{d(r^2J)}{dr} \\
+        \ddt(n)&= (\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i    - \frac{1}{r^2}\frac{d}{dr}\left(-r^2 D \frac{\partial\phi}{\partial r}\right) \\
+        \ddt(n)- \frac{1}{r^2}\frac{d}{dr}\left(r^2 D \frac{\partial\phi}{\partial r}\right)&= (\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i \\
+    \end{align*}
+    \begin{equation}
+        \boxed{\frac{1}{v}\frac{\partial\phi}{\partial t}- \frac{1}{r^2}\frac{d}{dr}\left(r^2 D \frac{\partial\phi}{\partial r}\right)= (\nu_p\Sigma_f-\Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i \\}
+    \end{equation}
     % The time rate of change of the volume can be formulated by integrating the local time rate of change over every point in the volume:
     % \begin{gather*}
     %     \mathrm{time~rate}=\ddt\int d\volume\Nc(\vec{r},t) \\
