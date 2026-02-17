@@ -76,15 +76,19 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
 \item[(a)] ({\bf 10 points}) Derive the one-group, steady-state, 1-D ($r$-only) neutron balance equation in spherical geometry. Follow the approach used in class to derive the balance equation for the Cartesian cases. ({\it Hint}: Unlike the Cartesian case, the area for the neutron current calculation on the two surfaces will be different).
 \item[] \ans{
     If we consider the given control volume, and neutrons are conserved, then over that control volume the change in neutrons over time should be equivalent to the source rate minus the loss rate:
-    \begin{equation}
-        \mathrm{time~rate~of~change=sources-losses}
-    \end{equation}
+    \begin{gather*}
+        \mathrm{time~rate~of~change=sources-losses}\\
+        \mathrm{sources=fission~rate+current~entering}\\
+        \mathrm{losses=absorption~rate+current~leaving}
+    \end{gather*}
     The time rate of change of the volume can be formulated by integrating the local time rate of change over every point in the volume:
     \begin{gather*}
-        \mathrm{time~rate}=\ddt\int d\volume\Nc(\hat{r},t) \\
-        = \int d\volume \ddt\Nc(\hat{r},t)\\
-        = \int_{0}^{\pi}\int_{0}^{2\pi}\int_{r}^{r+dr}\Nc(\hat{r},t)\rho^2\sin(\varphi)d\rho d\theta d\varphi
+        \mathrm{time~rate}=\ddt\int d\volume\Nc(\vec{r},t) \\
+        = \int d\volume \ddt\Nc(\vec{r},t)\\
+        = \int_{0}^{\pi}\int_{0}^{2\pi}\int_{r}^{r+dr}\Nc(\vec{r},t)\rho^2\sin(\varphi)d\rho d\theta d\varphi
     \end{gather*}
+    Parts of both sources and losses will be proportional to flux: absorption and fission. These will be found by integrating the reaction rate $\Sigma_{i\in\{a,f\}}\phi(\vec{r},t)$ across the control volume.\\
+    For fission
 }
 \end{enumerate}
 
