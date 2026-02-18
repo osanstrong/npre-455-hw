@@ -22,6 +22,7 @@
 \newcommand{\hO}{\hat{\Omega}}
 \newcommand\todo[1]{{\color{red}\bf [TODO: #1]}}
 \usepackage{tcolorbox}
+\usepackage{hyperref}
 \setacronymstyle{long-short}
 
 \newcommand{\mdash}{\discretionary{}{}{\kern 0.1em}---\discretionary{}{}{\kern 0.1em}}
@@ -323,9 +324,11 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
     \begin{equation}
         \boxed{\phi(r)=\frac{S}{4\pi D\sinh(\tilde{R}/L)}\frac{\sinh\left[(\tilde{R}-r)/L\right]}{r}}
     \end{equation}
-    \begin{equation*}
-        \phi(r)=\frac{S}{4\pi D\sinh{\frac{\tilde{R}}{L}}}\frac{\sinh{\frac{\tilde{R}-r}{L}}}{r}
-    \end{equation*}
+    
+    % \begin{equation*}
+    
+    %     \phi(r)=\frac{S}{4\pi D\sinh{\frac{\tilde{R}}{L}}}\frac{\sinh{\frac{\tilde{R}-r}{L}}}{r}
+    % \end{equation*}
 
     % Now, we may apply boundary conditions.
     % For our first boundary condition, let us require that flux remains finite as $r\rightarrow0$:
@@ -347,9 +350,49 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
 
 \begin{enumerate}
 \item[(b)] ({\bf 5 points}) What is the rate [1/s] at which neutrons leak from the sphere?
+\item[] \ans{
+    At a given point on the surface, there is a net current $\vec{J}\cdot\hat{n}$ [1/cm$^2$/s] leaving the surface at that point.
+    Integrating this across the whole surface should yield the rate [1/s] at which neutrons leave the surface:
+    \begin{gather*}
+        \int_S \vec{J(r)}\cdot\hat{n} dA \\
+        4\pi R^2\times-D\frac{d}{dr}\left[\frac{S}{4\pi D\sinh{\frac{\tilde{R}}{L}}}\frac{\sinh{\frac{\tilde{R}-r}{L}}}{r}\right](r=R) \\
+        4\pi R^2\times-D\left[\frac{S}{4\pi D\sinh(\tilde{R}/L)}\frac{-\frac{1}{L}\cosh\left(\frac{\tilde{R}-r}{L}\right)r-\sinh\left(\frac{\tilde{R}-r}{L}\right)}{r^{2}}\right](r=R) \\
+        4\pi R^2\times-\left[\frac{S}{4\pi \sinh(\tilde{R}/L)}\frac{-\frac{1}{L}\cosh\left(\frac{\tilde{R}-r}{L}\right)r-\sinh\left(\frac{\tilde{R}-r}{L}\right)}{r^{2}}\right](r=R) \\
+        4\pi R^2\times-\left[\frac{S}{4\pi \sinh(\tilde{R}/L)}\frac{-\frac{R}{L}\cosh\left(\frac{\tilde{R}-R}{L}\right)-\sinh\left(\frac{\tilde{R}-R}{L}\right)}{R^{2}}\right] \\
+        -\left[\frac{S}{\sinh((R+2D)/L)}\left({-\frac{R}{L}\cosh\left(\frac{2D}{L}\right)-\sinh\left(\frac{2D}{L}\right)}\right)\right] \\
+        \boxed{S\left[\frac{\left({\frac{R}{L}\cosh\left(\frac{2D}{L}\right)+\sinh\left(\frac{2D}{L}\right)}\right)}{\sinh(\frac{R+2D}{L})}\right]}
+    \end{gather*}
+}
 \item[(c)] ({\bf 5 points}) What is the probability that a neutron emitted by the source escapes from the surface of the sphere?
+\item[] \ans{
+    Since our sphere is non-multiplying, we know that only neutrons emitted by the source escape from the sphere, so we can find this probability as the ratio of the number of neutrons escaping to the number of neutrons produced:
+    \begin{gather*}
+        \frac{S\left[\frac{\left({\frac{R}{L}\cosh\left(\frac{2D}{L}\right)+\sinh\left(\frac{2D}{L}\right)}\right)}{\sinh(\frac{R+2D}{L})}\right]}{S} \\
+        \boxed{\frac{\left({\frac{R}{L}\cosh\left(\frac{2D}{L}\right)+\sinh\left(\frac{2D}{L}\right)}\right)}{\sinh(\frac{R+2D}{L})}}
+    \end{gather*}
+}
 \item[(d)] ({\bf 5 points}) Using $S=10^{10}$ [neutrons/s], $D=0.9$ [cm], $\Sigma_a=0.5$ [1/cm], and $R=100$ [cm], determine if this system is at steady state. 
+\item[] \ans{
+    If our (non-multiplying) system is in steady state, then:
+    \begin{align*}
+        0&=\mathrm{produced-leave-absorbed}\\
+        &=S-4\pi R^2\left(-D\frac{d\phi}{dr}(R)\right) - \int d\volume \Sigma_a\phi(r)
+    \end{align*}
+    Evaluating using a \href{https://www.desmos.com/calculator/omxnrigl9g}{calculator} and the above values yields:
+    \begin{align*}
+        0=10^{10}-(\~0)-10^{10}
+    \end{align*}
+    Our system does indeed appear to be in steady state.
+    The negligible amount of neutrons leaving the sphere also makes sense, as our diffusion length $L=\sqrt{\frac{D}{\Sigma_a}}=1.342~\mathrm{cm}$ is \emph{far} lower than the length neutrons have to go to escape the sphere ($R=100~\mathrm{cm}$).
+}
 \item[(e)] ({\bf 10 points}) Now, re-solve this problem using the Robin-type vacuum boundary condition instead of the extrapolated vacuum boundary condition. Find the flux solution.
+\item[] \ans{
+    Now we have the boundary conditions:
+    \begin{gather*}
+        \lim_{r\rightarrow0}\left[-D\frac{d\phi(r)}{dr}=\frac{S}{4\pi r^2}\right]\\
+        J_-(R)=
+    \end{gather*}
+}
 \item[(f)] ({\bf 4 points}) Plot Eq. \eqref{eq:phi1} and your answer from part (e) as a function of $r$ for $0.01R\leq r\leq R$ using $R=1.5$ [cm], $S=100$ [neutrons/s], $\Sigma_a=0.026$ [1/cm], and $D=0.79$ [cm]. Qualitatively explain the two flux solutions -- does the extrapolated boundary condition do a good job of approximating the Robin boundary condition?
 \end{enumerate}
 
