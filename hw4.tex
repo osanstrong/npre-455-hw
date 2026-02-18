@@ -251,9 +251,14 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
 
 
 \clearpage
-\noindent 4. ({\bf non-multiplying flux solution}) A point source emitting $S$ neutrons/s is placed at the center of a non-multiplying sphere with radius $R$.
+\noindent 4. ({\bf non-multiplying flux solution}) A point source emitting $S$ neutrons/s is placed at the center of a non-multiplying sphere with radius $R$\ans{, as shown in Figure~\ref{fig:p4sphere}}.
 % add question about value of current being so small - does it make sense depending on L?
-
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figures/hw4_p4sphere.png}
+    \caption{A point source of strength $S$ lying at the center of a non multiplying sphere of radius $R$.}
+    \label{fig:p4sphere}
+\end{figure}
 \begin{enumerate}
 \item[(a)] ({\bf 8 points}) Show that the flux in the sphere is given by the following. Use an extrapolated vacuum boundary condition. ({\it Hint}: to obtain the given solution form, recall the identity: $A\sinh{bx}+B\cosh{bx}=C\sinh{\left\lbrack b(a-x)\right\rbrack}$).
 
@@ -261,7 +266,83 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
 \label{eq:phi1}
 \phi(r)=\frac{S}{4\pi D\sinh{\frac{\tilde{R}}{L}}}\frac{\sinh{\frac{\tilde{R}-r}{L}}}{r}
 \eeq
+\item[] \ans{
+    Let us start with the general neutron diffusion equation:
+    \begin{equation}
+        \ddt\phi-\nabla D\nabla\phi = (\nu_p\Sigma_f - \Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i
+    \end{equation}
+    Then simplifying to 1D spherical coordinates, with uniform properties, in steady-state operation, without multiplication or a distributed source:
+    \begin{align*}
+    -\nabla D\nabla\phi &= - \Sigma_a\phi\\
+    \frac{1}{r^2}\frac{d}{dr}\left(r^2 \frac{\partial\phi}{\partial r}\right) - \frac{\Sigma_a}{D}\phi&=0\\
+    \frac{1}{r^2}\frac{d}{dr}\left(r^2 \frac{\partial\phi}{\partial r}\right) - \frac{1}{L^2}\phi&=0\\
+    \end{align*}
+    where $L=\sqrt{\frac{D}{\Sigma_a}}$.
+    Applying the substitution $\phi(r)=\mu(r)/r$:
+    \begin{align*}
+        \frac{1}{r^2}\left\lbrack \frac{d}{dr}\left(r^2\frac{d\phi(r)}{dr}\right) \right\rbrack &-\frac{1}{L^2}\phi(r)=0 \\  
+        \frac{1}{r^2}\left\lbrack \frac{d}{dr}\left(r^2\frac{d}{dr}\left[\frac{\mu(r)}{r}\right]\right) \right\rbrack &-\frac{1}{L^2}\left(\frac{\mu(r)}{r}\right)=0 \\
+        \frac{1}{r^2}\left\lbrack \frac{d}{dr}\left(r^2\left[\frac{\mu'(r)r - \mu(r)}{r^2}\right]\right) \right\rbrack &-\frac{1}{L^2}\left(\frac{\mu(r)}{r}\right)=0 \\
+        \frac{1}{r^2}\left\lbrack \frac{d}{dr}\left(\mu'(r)r - \mu(r)\right) \right\rbrack &-\frac{1}{L^2}\left(\frac{\mu(r)}{r}\right)=0 \\
+        \frac{1}{r^2}\left\lbrack \mu''(r)r + \mu'(r) - \mu'(r) \right\rbrack &-\frac{1}{L^2}\left(\frac{\mu(r)}{r}\right)=0 \\
+        \frac{\mu''(r)}{r} &-\frac{1}{L^2}\left(\frac{\mu(r)}{r}\right)=0 \\
+        \mu''(r) &-\frac{1}{L^2}\mu(r) = 0
+    \end{align*}
+    We can apply the Helmholtz solution for hyperbolic trigonometry functions, and revert our earlier substitution:
+    \begin{align*}
+        \mu(r)&=A\sinh(r/L)+B\cosh(r/L)\\
+        \frac{\mu(r)}{r}=\phi(r)&=\frac{A\sinh(r/L)}{r}+\frac{B\cosh(r/L)}{r}
+    \end{align*}
+    Allow us to make the following substitution:
+    \begin{equation*}
+        \frac{A\sinh(r/L)}{r}+\frac{B\cosh(r/L)}{r}=\phi(r)=\frac{C}{r}\sinh\left[(a-r)/L\right]
+    \end{equation*}
+    Now, using the extrapolated vacuum boundary condition, for an extrapolated boundary $\tilde{R}=R+\tilde{a}$:
+    \begin{align*}
+        \phi(\tilde{R})=0&=\frac{C}{\tilde{R}}\sinh\left[(a-\tilde{R})/L\right]\\
+        &\color{gray}\rightarrow a=\tilde{R}
+    \end{align*}
+    And finally applying a symmetric condition around the source at $r=0$:
+    \begin{gather*}
+        \lim_{r\rightarrow0}\left[-D\frac{d\phi(r)}{dr}=\frac{S}{4\pi r^2}\right]\\
+        \lim_{r\rightarrow0}\left[-D\frac{d}{dr}\left(\frac{C}{r}\sinh\left[(\tilde{R}-r)/L\right]\right)=\frac{S}{4\pi r^2}\right]\\
+        \lim_{r\rightarrow0}\left[-D
+            \left(\frac{-\frac{C}{L}\cosh((\tilde{R}-r)/L)r-\sinh((\tilde{R}-r)/L)}{r^2}\right)
+        =\frac{S}{4\pi r^2}\right]\\
+        \lim_{r\rightarrow0}\left[-D
+            \left(-\frac{C}{L}\cosh((\tilde{R}-r)/L)r-\sinh((\tilde{R}-r)/L)\right)
+        =\frac{S}{4\pi}\right]\\
+        -D
+            \left(-\frac{C}{L}\cosh(\tilde{R}/L)(0)-\sinh(\tilde{R}/L)\right)
+        =\frac{S}{4\pi}\\
+        DC\sinh(\tilde{R}/L)=\frac{S}{4\pi}\\
+        C=\frac{S}{4\pi D\sinh(\tilde{R}/L)}
+        % \lim_{r\rightarrow0}\left[-D\frac{d\phi(r)}{dr}&=\frac{S}{4\pi r^2}\right]\\
+    \end{gather*}
+    Yielding a final equation:
+    \begin{equation}
+        \boxed{\phi(r)=\frac{S}{4\pi D\sinh(\tilde{R}/L)}\frac{\sinh\left[(\tilde{R}-r)/L\right]}{r}}
+    \end{equation}
+    \begin{equation*}
+        \phi(r)=\frac{S}{4\pi D\sinh{\frac{\tilde{R}}{L}}}\frac{\sinh{\frac{\tilde{R}-r}{L}}}{r}
+    \end{equation*}
 
+    % Now, we may apply boundary conditions.
+    % For our first boundary condition, let us require that flux remains finite as $r\rightarrow0$:
+    % \begin{align*}
+    %     \lim_{r\rightarrow0}\phi(r)&=\mathrm{something~finite}\\
+    %     &=\lim_{r\rightarrow0}\frac{A\sinh(r/L)}{r}+\frac{B}{0}\\
+    %     &\color{gray}\rightarrow B=0
+    % \end{align*}
+    % Evaluating using L'Hopital to make sure that A can be non-zero:
+    % \begin{gather*}
+    %     \lim_{r\rightarrow0}\frac{A\sinh(r/L)}{r}\\
+    %     \lim_{r\rightarrow0}\frac{\frac{A}{L}\cosh(r/L)}{1}\\
+    %     \frac{A}{L}\neq 0
+    % \end{gather*}
+    % Perfect.
+    % Now, for our second boundary condition, let us apply the extrapolated boundary condition:
+}
 \end{enumerate}
 
 \begin{enumerate}
