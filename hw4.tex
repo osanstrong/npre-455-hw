@@ -380,18 +380,39 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
     \end{align*}
     Evaluating using a \href{https://www.desmos.com/calculator/omxnrigl9g}{calculator} and the above values yields:
     \begin{align*}
-        0=10^{10}-(\~0)-10^{10}
+        0=10^{10}-(\approx0)-10^{10}
     \end{align*}
     Our system does indeed appear to be in steady state.
-    The negligible amount of neutrons leaving the sphere also makes sense, as our diffusion length $L=\sqrt{\frac{D}{\Sigma_a}}=1.342~\mathrm{cm}$ is \emph{far} lower than the length neutrons have to go to escape the sphere ($R=100~\mathrm{cm}$).
+    The negligible amount of neutrons leaving the sphere also makes sense, as our diffusion length $L=\sqrt{\frac{D}{\Sigma_a}}=1.342~\mathrm{cm}$ (corresponding to a distance $2L=2.684$~cm) is \emph{far} lower than the length neutrons have to go to escape the sphere ($R=100~\mathrm{cm}$).
 }
 \item[(e)] ({\bf 10 points}) Now, re-solve this problem using the Robin-type vacuum boundary condition instead of the extrapolated vacuum boundary condition. Find the flux solution.
 \item[] \ans{
     Now we have the boundary conditions:
     \begin{gather*}
         \lim_{r\rightarrow0}\left[-D\frac{d\phi(r)}{dr}=\frac{S}{4\pi r^2}\right]\\
-        J_-(R)=
+        J_-(R)=\frac{\phi(R)}{4}+\frac{D}{2}\frac{d\phi}{dr}(R)=0
     \end{gather*}
+    of symmetry around a point source, and no incoming flux at the boundary $r=R$, respectively.
+    Let us choose the first form of the general solution:
+    \begin{align*}
+        \phi(r)&=\frac{A\sinh(r/L)}{r}+\frac{B\cosh(r/L)}{r}\\
+        \frac{d\phi}{dr}(r)&=\frac{\left(\frac{B}{L}r-A\right)\sinh\left(\frac{r}{L}\right)}{r^{2}}+\frac{\left(\frac{A}{L}r-B\right)\cosh\left(\frac{r}{L}\right)}{r^{2}}\\
+    \end{align*}
+    Combining with our boundary conditions:
+    \begin{gather*}
+        \color{gray}\lim_{r\rightarrow0}\left[-D\left(\frac{\left(\frac{B}{L}r-A\right)\sinh\left(\frac{r}{L}\right)}{r^{2}}+\frac{\left(\frac{A}{L}r-B\right)\cosh\left(\frac{r}{L}\right)}{r^{2}}\right)=\frac{S}{4\pi r^2}\right]\\
+        \color{gray}-D\left(\left(0-A\right)\sinh\left(0\right)+\left(0-B\right)\cosh\left(0\right)\right)=\frac{S}{4\pi}\\
+        B=\frac{S}{4\pi D}\\
+        J_-(R)=\frac{\frac{A\sinh(R/L)}{R}+\frac{B\cosh(R/L)}{R}}{4}+\frac{D}{2}\left(\frac{\left(\frac{B}{L}R-A\right)\sinh\left(\frac{R}{L}\right)}{R^{2}}+\frac{\left(\frac{A}{L}R-B\right)\cosh\left(\frac{R}{L}\right)}{R^{2}}\right)=0
+    \end{gather*}
+    That being said, these are still linear functions of A and B, so this condition can be solved using \texttt{sympy} for A (code in Appendix~\ref{app:sym}):
+    \begin{equation*}
+        A=-S\frac{(LR-2DL)\cosh(R/L) + 2DR\sinh(R/L)}{4\pi D\left((LR-2DL)\sinh(R/L) + 2DR\cosh(R/L)\right)}
+    \end{equation*}
+    yielding a final equation:
+    \begin{equation}
+        \phi(r)=S\frac{1}{r}\left(\frac{S}{4\pi D}\cosh(r/L)  -\frac{(LR-2DL)\cosh(R/L) + 2DR\sinh(R/L)}{4\pi D\left((LR-2DL)\sinh(R/L) + 2DR\cosh(R/L)\right)}\sinh(r/L)\right)
+    \end{equation}
 }
 \item[(f)] ({\bf 4 points}) Plot Eq. \eqref{eq:phi1} and your answer from part (e) as a function of $r$ for $0.01R\leq r\leq R$ using $R=1.5$ [cm], $S=100$ [neutrons/s], $\Sigma_a=0.026$ [1/cm], and $D=0.79$ [cm]. Qualitatively explain the two flux solutions -- does the extrapolated boundary condition do a good job of approximating the Robin boundary condition?
 \end{enumerate}
@@ -428,6 +449,39 @@ When asked to plot flux solutions in your homework, I will ask you to qualitativ
 \eeq
 \end{enumerate}
 
+
+\appendix
+\section{Sympy code}\label{app:sym}
+\color{violet}
+    The following script using \texttt{sympy} was used to solve for a coefficient of Problem 4f:
+    \begin{verbatim}
+
+import sympy as sp
+from sympy import Symbol as Sym
+from sympy import sinh, cosh
+
+S = Sym("S")
+PI = sp.pi
+R = Sym("R")
+D = Sym("D")
+L = Sym("L")
+
+B = Sym("B")
+A = Sym("A")
+
+
+ex1 = B - S / (4*PI*D)
+ex0 = (A * sinh(R/L) + B*cosh(R/L))/(R*4) + (D/(2*R*R)) * ((B*R/L-A)*sinh(R/L) + (A*R/L - B)*cosh(R/L))
+
+sol = sp.solve((ex1, ex0), (A, B))
+
+print(f"A: {sp.simplify(sol[A])}")
+print(f"B: {sp.simplify(sol[B])}")
+
+>> A: -S*(-2*D*L*cosh(R/L) + 2*D*R*sinh(R/L) + L*R*cosh(R/L))/
+    (4*pi*D*(-2*D*L*sinh(R/L) + 2*D*R*cosh(R/L) + L*R*sinh(R/L)))
+>> B: S/(4*pi*D)
+    \end{verbatim}
 
 \end{document}
 
