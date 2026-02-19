@@ -491,12 +491,49 @@ When asked to plot flux solutions in your homework, I will ask you to qualitativ
         \color{gray}\rightarrow B_1=-\tilde{a}\\
         \tilde{b}=b+2D_2\\
         \phi_2(\tilde{b})=A_2\sinh\left(\frac{B_2-\tilde{b}}{L_2}\right)\\
-        \color{gray}\rightarrow B_1=\tilde{b}
+        \color{gray}\rightarrow B_2=\tilde{b}
     \end{gather*}
 
     Using \texttt{sympy} to solve for $A_1$ and $A_2$ (seen in Appendix~\ref{app:sym2}) yields:
+    \newcommand{\btoL}{\frac{2\tilde{b}}{L_2}}
+    \newcommand{\atoL}{\frac{2\tilde{a}}{L_1}}
+    {\footnotesize
+    \begin{equation*}
+        A_1=\frac{2L_1L_2S\left(1-\exp(\btoL)\right)*\exp(\frac{\tilde{a}}{L_1})}{D_1L_2\left(\exp(\btoL)-\exp(\atoL)+\exp(\btoL+\atoL)-1\right)+D_2L_1\left(\exp(\atoL)-\exp(\btoL)+\exp(\btoL+\atoL)-1\right)}
+    \end{equation*}
+    \begin{equation*}
+        A_2=\frac{-2L_1L_2S\left(1-\exp(\atoL)\right)*\exp(\frac{\tilde{b}}{L_2})}{D_1L_2\left(\exp(\btoL)-\exp(\atoL)+\exp(\btoL+\atoL)-   1\right)+D_2L_1\left(\exp(\atoL)-\exp(\btoL)+\exp(\btoL+\atoL)-1\right)}        
+    \end{equation*}
+    % \begin{equation*}
+    %     A_2=\frac{-2L_1L_2S\left(\exp(\atoL)-1\right)*\exp(\frac{\tilde{b}}{L_2})}{D_1L_2\left(\exp(\atoL)-\exp(\btoL)-\exp(\btoL+\atoL)+   1\right)+D_2L_1\left(\exp(\btoL)-\exp(\atoL)-\exp(\btoL+\atoL)+1\right)}        
+    % \end{equation*}
+    }
+    Which can be plugged into our general equation to yield:
+
+    {\footnotesize\begin{equation}
+        \phi_1(x)=\frac{2L_1L_2S\left(\left(1-\exp(\btoL)\right)*\exp(\frac{\tilde{a}}{L_1})\times\sinh\left(\frac{-\tilde{a}-x}{L_1}\right)\right)}{D_1L_2\left(\exp(\btoL)-\exp(\atoL)+\exp(\btoL+\atoL)-   1\right)+D_2L_1\left(\exp(\atoL)-\exp(\btoL)+\exp(\btoL+\atoL)-1\right)}
+    \end{equation}
+    \begin{equation}
+        \phi_2(x)=\frac{-2L_1L_2S\left(1-\exp(\atoL)\right)*\exp(\frac{\tilde{b}}{L_2})\times\sinh\left(\frac{\tilde{b}-x}{L_2}\right)}{D_1L_2\left(\exp(\btoL)-\exp(\atoL)+\exp(\btoL+\atoL)-   1\right)+D_2L_1\left(\exp(\atoL)-\exp(\btoL)+\exp(\btoL+\atoL)-1\right)}
+    \end{equation}
+
+
+    }
 }
 \item[(b)] ({\bf 4 points}) Plot the flux for $D_1=0.1$ [cm], $D_2=0.8$ [cm], $L_1=1.0$ [cm], $L_2=7.0$ [cm], $a=20$ [cm], $b=30$ [cm], and $S=10^{10}$ [neutrons/s]. Region 1 is the beryllium, and region 2 is the graphite. Qualitatively describe the behavior.
+\item[] \ans{
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[width=0.7\linewidth]{figures/hw4_p5b_flux.png}
+        \caption{Flux of a 20 cm infinite beryllium slab to the left of a 30 cm graphite infinite slab, with an idealized plane source of neutrons between them.}
+        \label{fig:p5b_flux}
+    \end{figure}
+    The flux of the two slabs is compared in Figure~\ref{fig:p5b_flux}. The flux in both regions peak and meet at their border near the source, which makes sense, as we assumed both that flux was continuous, and that the only source of neutrons was concentrated in that planar border.\\
+
+    Likewise, both flux distributions rapidly taper off away from the center at $x=0$, reaching some lower point with downwards slope facing the outwards boundaries, which also makes sense given our vacuum boundary conditions.\\
+
+    This is also where a difference between the two materials can be seen: while the beryllium region on the left has a small $L_1=1.0$ [cm], and tapers off incredibly quickly, the graphite region on the right has a larger $L_2=7.0$ [cm], and tapers off much more slowly, as we expect neutrons to diffuse seven times as far on average.
+}
 \end{enumerate}
 
 
@@ -505,12 +542,25 @@ When asked to plot flux solutions in your homework, I will ask you to qualitativ
 
 \begin{enumerate}
 \item[(a)] ({\bf 5 points}) (True/False) At a material interface between regions of different $\Sigma$, only some of the components of $\vec{J}$ are continuous across the interface.
+\item[] \ans{\textbf{True}ish? The $\Sigma$ difference \emph{itself} would not make the current different, only the gradient of flux required to accomplish that conservation of current.
+However, generally, only the normal component of $\vec{J}$ needs to be continuous across the interface, to conserve neutrons crossing the boundary.
+Additionally, if we assume some perfectly localized source at the boundary, it would not be directly continuous at all, instead having a specified difference, or ``jump'', corresponding to that addition of neutrons.}
 \item[(b)] ({\bf 5 points}) (True/False) At a material interface, the gradient in flux must be continuous.
+\item[] \ans{
+    \textbf{False.} As mentioned above, the neutron \emph{current} normal to the surface must be continuous (or have a specified discontinuity corresponding to an idealized local source in the boundary).
+    But current is proportional to the gradient in flux \emph{times} the diffusion coefficient.
+    If the two materials have different diffusion coefficients, then they will have different gradients in flux to produce the same current of neutrons crossing the boundary.
+}
 \item[(c)] ({\bf 5 points}) (True/False) When we write the diffusion equation as shown below, this means that neutrons only travel in the $\pm x$ directions.
 
 \beq
 -D\frac{d^2\phi}{dx^2}+\Sigma_a\phi=S
 \eeq
+\item[] \ans{
+    \textbf{False}.
+    Under neutron diffusion, the \emph{net} neutron current is proportional to the gradient, which we assume here to only apply in the $\pm x$ directions.
+    But what this does \emph{not} mean is that no neutrons move in those other directions, just that they don't have any \emph{net} movement, so the current crossing a $z$ or $y$ boundary in one direction would be canceled out by the same number of neutrons moving in the other direction.
+}
 \end{enumerate}
 
 
@@ -548,6 +598,65 @@ print(f"B: {sp.simplify(sol[B])}")
     \end{verbatim}
 
 \section{Sympy code for problem 5}\label{app:sym2}
+The following \texttt{python} code was used to solve for the coefficients of flux solutions in Problem~5:
+
+\begin{verbatim}
+import sympy as sp
+from sympy import Symbol as Sym
+from sympy import sinh, cosh
+
+S = Sym("S")
+PI = sp.pi
+
+A1 = Sym("A1")
+A2 = Sym("A2")
+B1 = Sym("B1")
+B2 = Sym("B2")
+
+D1 = Sym("D1")
+L1 = Sym("L1")
+D2 = Sym("D2")
+L2 = Sym("L2")
+
+
+at = Sym("at")
+bt = Sym("bt")
+
+ex2 = at + B1
+ex3 = bt - B2
+ex4 = (D2*A2/L2) * cosh(B2/L2) - (D1*A1/L1) * cosh(B1/L1) - S
+ex5 = A1*sinh(B1/L1) - A2*sinh(B2/L2)
+
+sol2 = sp.solve((ex2, ex3, ex4, ex5), (A1, A2, B1, B2), dict=True)[0]
+
+print(f"A1: {sp.simplify(sol2[A1])}")
+print(f"B1: {sp.simplify(sol2[B1])}")
+print(f"A2: {sp.simplify(sol2[A2])}")
+print(f"B2: {sp.simplify(sol2[B2])}")
+
+\end{verbatim}
+\texttt{
+\noindent>>A1: 2*L1*L2*S*(1 - exp(2*bt/L2))*exp(at/L1)/(-D1*L2*exp(2*at/L1) + D1*L2*exp(2*bt/L2) + D1*L2*exp(2*bt/L2 + 2*at/L1) - D1*L2 + D2*L1*exp(2*at/L1) - D2*L1*exp(2*bt/L2) + D2*L1*exp(2*bt/L2 + 2*at/L1) - D2*L1)\\
+>>B1: -at\\
+>>A2: -2*L1*L2*S*(exp(2*at/L1) - 1)*exp(bt/L2)/(D1*L2*exp(2*at/L1) - D1*L2*exp(2*bt/L2) - D1*L2*exp(2*bt/L2 + 2*at/L1) + D1*L2 - D2*L1*exp(2*at/L1) + D2*L1*exp(2*bt/L2) - D2*L1*exp(2*bt/L2 + 2*at/L1) + D2*L1)\\
+>>B2: bt
+}
 
 \end{document}
+
+
+% Q1 30%: Conceptual, like the q1 on a homework. Will try to trick.
+% Q2-3 40%: Solving for φ, e.g. hw4
+% Q4 15%: Σ=σN
+% Q5 15%: multiplication factor
+%
+% No calculator
+% 1 sheet of handwritten notes double sided
+% Can see cover sheet of exam
+% Files / Practice Exam, try to do without using answer key
+
+% Grading philosophy: Like being tough without stressing about grades.
+% If the like 3rd or 4th person (ignoring like outliers at 100) gets 88, she'd add 12. That sorta vibe
+
+% Need to write diffusion equation on notes sheet, for example
 
