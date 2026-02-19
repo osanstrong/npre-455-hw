@@ -415,6 +415,28 @@ If all neutrons are simplified to one energy group, then scattering doesn't remo
     \end{equation}
 }
 \item[(f)] ({\bf 4 points}) Plot Eq. \eqref{eq:phi1} and your answer from part (e) as a function of $r$ for $0.01R\leq r\leq R$ using $R=1.5$ [cm], $S=100$ [neutrons/s], $\Sigma_a=0.026$ [1/cm], and $D=0.79$ [cm]. Qualitatively explain the two flux solutions -- does the extrapolated boundary condition do a good job of approximating the Robin boundary condition?
+\item[] \ans{
+
+    \begin{figure}[!htb]
+        \centering
+        \includegraphics[width=0.6\linewidth]{figures/hw4_p4f_flux.png}
+        \caption{The flux $\phi(r)$ for the system of 4.f, found using an extrapolated vacuum boundary condition (Equation~\ref{eq:phi1})}, and using the explicit incoming current condition (Problem 4.e).
+        \label{fig:p4f-flux}
+    \end{figure}
+    Both flux solutions are compared in Figure~\ref{fig:p4f-flux}.
+    In both solutions, the flux rapidly approaches infinity as $r\rightarrow0$, which makes sense:
+    our condition at $r=0$, which involves the derivative of the flux is equal to $\frac{S}{4\pi r^2}$, which approaches infinity there.
+    I.e., we need to find a finite value within an infinitesimal area, resulting in an infinity-approaching value per area near that center.\\
+
+    Likewise, both functions steadily taper down and approach a near-zero value at $r=1.5~[\mathrm{cm}]$.
+    Near that edge, the area is greatest (neutrons spread out), and some of them have been absorbed.
+    Though unlike earlier, we can expect more of the tapering to be due to geometric attenuation, since this time our diffusion length $\sqrt{\frac{D}{\Sigma_a}}=5.52~[\mathrm{cm}]$ is greater than our $R=1.5~[\mathrm{cm}]$.
+    We'd expect neutrons to travel around $2L=11.02~\mathrm{cm}$, making it out of the sphere most of the time.
+
+    However, this is where a difference between the two solutions appears; across most of the given $r$ up to the edge, the extrapolated solution seems to be \emph{slightly} lower than the Robin solution.
+    All things considered, it seems like the extrapolated boundary condition does a pretty \emph{reasonable} job of approximating the Robin boundary condition, but not indistinguishably so.
+    It seems like the extrapolated condition would be most useful in a classroom or back-of-the-envelope setting.
+}
 \end{enumerate}
 
 \begin{tcolorbox}
