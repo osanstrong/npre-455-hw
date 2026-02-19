@@ -454,6 +454,48 @@ When asked to plot flux solutions in your homework, I will ask you to qualitativ
 
 \begin{enumerate}
 \item[(a)] ({\bf 10 points}) Derive an expression for the neutron flux in the system.
+\item[] \ans{
+    Let us start with the general neutron diffusion equation:
+    \begin{equation}
+        \ddt\phi-\nabla D\nabla\phi = (\nu_p\Sigma_f - \Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i
+    \end{equation}
+    For both slabs, which are not themselves multiplying nor contain sources, this simplifies in 1D Cartesian:
+    \begin{gather*}
+        \ddt\phi-\nabla D\nabla\phi = (\nu_p\Sigma_f - \Sigma_a)\phi + s + \sum_{i=1}^{N}\lambda_iC_i\\
+        -D\frac{d\phi}{dx}=-\Sigma_a\phi\\
+        \frac{d\phi}{dx}-\frac{1}{L^2}\phi=0\color{gray},~L=\sqrt{\frac{d}{\Sigma_a}}\\
+        \phi_1=A_1\sinh\left(\frac{B_1-x}{L_1}\right)\\
+        \phi_2=A_2\sinh\left(\frac{B_2-x}{L_2}\right)
+    \end{gather*}
+    leaving derivatives with respect to $x$:
+    \begin{gather*}
+        \frac{d\phi_1}{dx}=-\frac{A_1}{L_1}\cosh\left(\frac{B_1-x}{L_1}\right)\\
+        \frac{d\phi_2}{dx}=-\frac{A_2}{L_2}\cosh\left(\frac{B_2-x}{L_2}\right)
+    \end{gather*}
+    Allow us next to apply boundary conditions.\\
+
+    First, flux should be continuous at 0:
+    \begin{gather*}
+        \phi_1(0)=\phi_2(0) \\
+        A_1\sinh\left(\frac{B_1}{L_1}\right) - A_2\sinh\left(\frac{B_2}{L_2}\right)=0
+    \end{gather*}
+    Then, across the plane source at $x=0$ we have a jump condition:
+    \begin{gather*}
+        \lim_{x\rightarrow0}\left[-D_2\frac{d\phi_2}{dx}+D_1\frac{d\phi_1}{dx}\right]=S\\
+        D_2\frac{A_2}{L_2}\cosh\left(\frac{B_2}{L_2}\right)-D_1\frac{A_1}{L_1}\cosh\left(\frac{B_1}{L_1}\right)-S=0
+    \end{gather*}
+    Finally, for $\phi_1$ at $x=-a$ and for $\phi_2$ at $x=b$, we can apply extrapolated vacuum boundary conditions:
+    \begin{gather*}
+        \tilde{a}=a+2D_1\\
+        \phi_1(-\tilde{a})=A_1\sinh\left(\frac{B_1+\tilde{a}}{L_1}\right)\\
+        \color{gray}\rightarrow B_1=-\tilde{a}\\
+        \tilde{b}=b+2D_2\\
+        \phi_2(\tilde{b})=A_2\sinh\left(\frac{B_2-\tilde{b}}{L_2}\right)\\
+        \color{gray}\rightarrow B_1=\tilde{b}
+    \end{gather*}
+
+    Using \texttt{sympy} to solve for $A_1$ and $A_2$ (seen in Appendix~\ref{app:sym2}) yields:
+}
 \item[(b)] ({\bf 4 points}) Plot the flux for $D_1=0.1$ [cm], $D_2=0.8$ [cm], $L_1=1.0$ [cm], $L_2=7.0$ [cm], $a=20$ [cm], $b=30$ [cm], and $S=10^{10}$ [neutrons/s]. Region 1 is the beryllium, and region 2 is the graphite. Qualitatively describe the behavior.
 \end{enumerate}
 
@@ -473,7 +515,7 @@ When asked to plot flux solutions in your homework, I will ask you to qualitativ
 
 
 \appendix
-\section{Sympy code}\label{app:sym}
+\section{Sympy code for problem 4}\label{app:sym}
 \color{violet}
     The following script using \texttt{sympy} was used to solve for a coefficient of Problem 4f:
     \begin{verbatim}
@@ -504,6 +546,8 @@ print(f"B: {sp.simplify(sol[B])}")
     (4*pi*D*(-2*D*L*sinh(R/L) + 2*D*R*cosh(R/L) + L*R*sinh(R/L)))
 >> B: S/(4*pi*D)
     \end{verbatim}
+
+\section{Sympy code for problem 5}\label{app:sym2}
 
 \end{document}
 
